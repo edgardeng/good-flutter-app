@@ -45,6 +45,10 @@ flutter:
 
   assets:
     - packages/base_library/assets/ic_login_bg.png
+  fonts:
+    - family: IconFont
+      fonts:
+        - asset: assets/fonts/iconfont.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

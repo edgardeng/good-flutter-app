@@ -1,6 +1,7 @@
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
-
+import 'dart:io';
+import 'package:flutter/services.dart';
 import 'good_flutter_app.dart';
 
 ///示例一。
@@ -8,9 +9,15 @@ void main() async {
   LogUtil.e("main is init");
 
   /// 等待sp初始化完成后再运行app。
-  /// sp初始化时间 release模式下30ms左右，debug模式下100多ms。
+  /// sp初始化时间 release模 式下30ms左右，debug模式下100多ms。
   /// await SpUtil.getInstance();
   runApp(GoodFlutterApp());
+  if (Platform.isAndroid) {
+    // 设置沉浸式状态栏
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(statusBarColor: Colors.transparent);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
+
 }
 
 ///示例一。带有sp初始化时间log。
