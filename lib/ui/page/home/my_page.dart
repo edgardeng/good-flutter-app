@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_flutter_app/router/index.dart';
 //import 'package:xiaodemo/model/app_model.dart';
 
 class MyPage extends StatefulWidget {
@@ -26,7 +27,16 @@ class _MyPageState extends State<MyPage> with AutomaticKeepAliveClientMixin {
         title: Text('MyPage')
       ),
       body: Container(
-        child: Text('MyPage ')
+        child: Row(
+          children: <Widget>[
+            RaisedButton(
+                child: Text("登录"),
+                onPressed: () {
+                  RouterHelper.push(context, '/login');
+            }),
+            Text('MyPage ')
+          ],
+        )
       ),
     );
   }
