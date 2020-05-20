@@ -1,16 +1,15 @@
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/res/icons.dart';
+import 'package:good_flutter_app/ui/page/index.dart';
 
-import 'home/cinema_page.dart';
-import 'home/my_page.dart';
-import 'home/movie_page.dart';
+import 'movie/cinema_page.dart';
+import 'movie/movie_home_page.dart';
+import 'user/my_page.dart';
 import 'home/star_page.dart';
 
 /// 首页 - 4个标签：
 ///
-//import 'package:xiaodemo/assets/icons.dart';
-//import 'package:xiaodemo/utils/event_center.dart';
 
 class BottomBarItem {
   BottomBarItem({this.title, this.name, this.icon, this.widget});
@@ -26,7 +25,7 @@ final List<BottomBarItem> _bottomBarItems = <BottomBarItem>[
       title: '电影',
       name: 'HomePage',
       icon: Icon(XDIcons.movie),
-      widget: MoviePage()),
+      widget: MovieHomePage()),
   BottomBarItem(
       title: '明星',
       name: 'cinema',

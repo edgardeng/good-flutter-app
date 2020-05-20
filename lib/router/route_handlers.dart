@@ -1,13 +1,12 @@
-
 //import '../helpers/color_helpers.dart';
 //import '../components/demo/demo_simple_component.dart';
 //import '../components/home/home_component.dart';
 import 'package:flutter/painting.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
+import 'package:good_flutter_app/ui/page/index.dart';
 
-import 'package:good_flutter_app/ui/page/home_page.dart';
-import 'package:good_flutter_app/ui/page/user/login_page.dart';
+import '';
 
 /// 路由的处理
 ///
@@ -18,6 +17,22 @@ var rootHandler = Handler(
 });
 
 var loginHandler = Handler(handlerFunc: (_, params) => LoginPage());
+
+var movieListHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  String title = params["title"]?.first;
+  String action = params["action"]?.first;
+  return MovieListPage(title: title, action: action);
+});
+
+var movieDetailHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return MovieDetailPage(id: params["id"][0]);
+});
+
+var actorDetailHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return ActorDetailPage(id: params["id"][0]);
+});
+
+
 //var demoRouteHandler = Handler(
 //    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //  String message = params["message"]?.first;

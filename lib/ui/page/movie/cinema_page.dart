@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-//import 'package:xiaodemo/model/app_model.dart';
 
 class CinemaPage extends StatefulWidget {
   @override

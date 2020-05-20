@@ -14,6 +14,7 @@ class RouterHelper {
   }
 
   static push(BuildContext context, String path) {
+    print('RouterHelper push: ' + path);
 //    FocusScope.of(context).requestFocus(new FocusNode());
     router?.navigateTo(context, path);
   }

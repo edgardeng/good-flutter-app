@@ -27,6 +27,20 @@ dependencies:
   package_info: ^0.4.0+18
   # flutter router
   fluro: "^1.6.3"
+  # 图片缓存
+  cached_network_image: ^2.2.0
+  # banner 的滚动图
+  carousel_slider: ^2.1.0
+  # save image
+  image_picker_saver: ^0.3.0
+  # photo view
+  photo_view: ^0.9.2
+  # video
+  video_player: ^0.10.11
+  # The video player for Flutter with a heart of gold.
+  chewie: ^0.9.10
+  # A Flutter plugin that provides a WebView widget.
+  webview_flutter: ^0.3.22
 
   base_library:
       path: ./base_library/

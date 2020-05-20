@@ -17,3 +17,4 @@ doc/api/
 .idea/
 /.idea/workspace.xml
 /.idea/libraries
+/.flutter-plugins-dependencies

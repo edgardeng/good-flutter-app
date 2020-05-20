@@ -9,11 +9,7 @@ class Routes {
   static String root = "/";
   static String login = "/login";
   static String splash = "/splash";
-
-//  static String demoSimpleFixedTrans = "/demo/fixedtrans";
-//  static String demoFunc = "/demo/func";
-//  static String deepLink = "/message";
-
+  static String movieList = "/movie";
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -22,11 +18,10 @@ class Routes {
     });
     router.define(login, handler: loginHandler);
     router.define(root, handler: rootHandler);
-
-//    router.define(demoSimple, handler: demoRouteHandler);
+    router.define(movieList, handler: movieListHandler);
+    router.define("/movie/:id", handler: movieDetailHandler);
+    router.define("/actor/:id", handler: actorDetailHandler);
 //    router.define(demoSimpleFixedTrans,
 //        handler: demoRouteHandler, transitionType: TransitionType.inFromLeft);
-//    router.define(demoFunc, handler: demoFunctionHandler);
-//    router.define(deepLink, handler: deepLinkHandler);
   }
 }

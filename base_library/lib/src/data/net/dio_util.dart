@@ -1,17 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 
 import '../protocol/base_resp.dart';
 
 /**
- * @Author: thl
- * @GitHub: https://github.com/Sky24n
- * @JianShu: https://www.jianshu.com/u/cbf2ad25d33a
- * @Email: 863764940@qq.com
- * @Description: Dio Util.
- * @Date: 2018/12/19
+ * @Author: edgardeng
+ * @GitHub: https://github.com/edgardeng
+ * @Description: Dio Util with Dio 3.X
+ * @Date: 2020/05/20
  */
 
 /// 请求方法.
@@ -24,7 +23,7 @@ class Method {
   static final String patch = "PATCH";
 }
 
-///Http配置.
+/// Http配置.
 class HttpConfig {
   /// constructor.
   HttpConfig({
@@ -86,7 +85,7 @@ class DioUtil {
   String _dataKey = "data";
 
   /// Options.
-  Options _options = getDefOptions();
+  BaseOptions _options = getDefOptions();
 
   /// PEM证书内容.
   String _pem;
@@ -134,7 +133,8 @@ class DioUtil {
     if (_dio != null) {
       _dio.options = _options;
       if (_pem != null) {
-        _dio.onHttpClientCreate = (HttpClient client) {
+        // Using proxy
+        (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
           client.badCertificateCallback =
               (X509Certificate cert, String host, int port) {
             if (cert.pem == _pem) {
@@ -146,7 +146,8 @@ class DioUtil {
         };
       }
       if (_pKCSPath != null) {
-        _dio.onHttpClientCreate = (HttpClient client) {
+        // Https certificate verification
+        (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
           SecurityContext sc = new SecurityContext();
           //file为证书路径
           sc.setTrustedCertificates(_pKCSPath, password: _pKCSPwd);
@@ -201,14 +202,14 @@ class DioUtil {
       } catch (e) {
         return new Future.error(new DioError(
           response: response,
-          message: "data parsing exception...",
+//          message: "data parsing exception...",
           type: DioErrorType.RESPONSE,
         ));
       }
     }
     return new Future.error(new DioError(
       response: response,
-      message: "statusCode: $response.statusCode, service error",
+//      message: "statusCode: $response.statusCode, service error",
       type: DioErrorType.RESPONSE,
     ));
   }
@@ -257,14 +258,14 @@ class DioUtil {
       } catch (e) {
         return new Future.error(new DioError(
           response: response,
-          message: "data parsing exception...",
+//          message: "data parsing exception...",
           type: DioErrorType.RESPONSE,
         ));
       }
     }
     return new Future.error(new DioError(
       response: response,
-      message: "statusCode: $response.statusCode, service error",
+//      message: "statusCode: $response.statusCode, service error",
       type: DioErrorType.RESPONSE,
     ));
   }
@@ -276,13 +277,13 @@ class DioUtil {
   Future<Response> download(
     String urlPath,
     savePath, {
-    OnDownloadProgress onProgress,
+        ProgressCallback onProgress,
     CancelToken cancelToken,
     data,
     Options options,
   }) {
     return _dio.download(urlPath, savePath,
-        onProgress: onProgress,
+        onReceiveProgress: onProgress,
         cancelToken: cancelToken,
         data: data,
         options: options);
@@ -311,11 +312,14 @@ class DioUtil {
   void _mergeOption(Options opt) {
     _options.method = opt.method ?? _options.method;
     _options.headers = (new Map.from(_options.headers))..addAll(opt.headers);
-    _options.baseUrl = opt.baseUrl ?? _options.baseUrl;
-    _options.connectTimeout = opt.connectTimeout ?? _options.connectTimeout;
+    if (opt is BaseOptions) {
+      _options.baseUrl = (opt as BaseOptions).baseUrl ?? _options.baseUrl;
+      _options.connectTimeout = (opt as BaseOptions).connectTimeout ?? _options.connectTimeout;
+    }
     _options.receiveTimeout = opt.receiveTimeout ?? _options.receiveTimeout;
     _options.responseType = opt.responseType ?? _options.responseType;
-    _options.data = opt.data ?? _options.data;
+
+//    _options.data = opt.data ?? _options.data;
     _options.extra = (new Map.from(_options.extra))..addAll(opt.extra);
     _options.contentType = opt.contentType ?? _options.contentType;
     _options.validateStatus = opt.validateStatus ?? _options.validateStatus;
@@ -329,25 +333,20 @@ class DioUtil {
     }
     try {
       print("----------------Http Log----------------" +
-          "\n[statusCode]:   " +
-          response.statusCode.toString() +
-          "\n[request   ]:   " +
-          _getOptionsStr(response.request));
-      _printDataStr("reqdata ", response.request.data);
-      _printDataStr("response", response.data);
+          "\n[statusCode]:   " + response.statusCode.toString() +
+          "\n[Request   ]:   " + _getOptionsStr(response.request));
+      _printDataStr("request data: ", response.request.data);
+      _printDataStr("response.data: ", response.data);
     } catch (ex) {
       print("Http Log" + " error......");
     }
   }
 
   /// get Options Str.
-  String _getOptionsStr(Options request) {
-    return "method: " +
-        request.method +
-        "  baseUrl: " +
-        request.baseUrl +
-        "  path: " +
-        request.path;
+  String _getOptionsStr(Options option) {
+    return "method: " + option.method +
+        " baseUrl: " + (option is RequestOptions ? (option as RequestOptions).baseUrl : '');
+//        "  path: " + option.;
   }
 
   /// print Data Str.
@@ -370,19 +369,35 @@ class DioUtil {
   }
 
   /// create new dio.
-  static Dio createNewDio([Options options]) {
+  static Dio createNewDio([BaseOptions options]) {
     options = options ?? getDefOptions();
-    Dio dio = new Dio(options);
+    var dio = Dio(options);
     return dio;
   }
 
   /// get Def Options.
-  static Options getDefOptions() {
-    Options options = new Options();
-    options.contentType =
-        ContentType.parse("application/x-www-form-urlencoded");
-    options.connectTimeout = 1000 * 30;
-    options.receiveTimeout = 1000 * 30;
-    return options;
+  static BaseOptions getDefOptions() {
+
+    return BaseOptions(
+//      baseUrl: "http://httpbin.org/",
+      connectTimeout: 1000 * 10,
+      receiveTimeout: 1000 * 30,
+      // 5s
+//      headers: {
+//        HttpHeaders.userAgentHeader: "dio",
+//        "api": "1.0.0",
+//      },
+//      contentType: Headers.jsonContentType,
+      // Transform the response data to a String encoded with UTF8.
+      // The default value is [ResponseType.JSON].
+//      responseType: ResponseType.plain,
+    ); // dio 3.x
+
+//    Options options = new Options();
+//    options.contentType =
+//        ContentType.parse("application/x-www-form-urlencoded");
+//    options.connectTimeout = 1000 * 30;
+//    options.receiveTimeout = 1000 * 30;
+//    return options;
   }
 }
