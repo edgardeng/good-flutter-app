@@ -7,8 +7,10 @@ import './route_handlers.dart';
 ///
 class Routes {
   static String root = "/";
+  static String home = "/home";
   static String login = "/login";
-  static String splash = "/splash";
+  static String web = "/web";
+//  static String splash = "/splash";
   static String movieList = "/movie";
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
@@ -16,11 +18,14 @@ class Routes {
           return Text("404 !!!");
       print("ROUTE WAS NOT FOUND !!!");
     });
+    router.define(root, handler: splashHandler);
+    router.define(web, handler: webHandler);
+    router.define(home, handler: rootHandler);
     router.define(login, handler: loginHandler);
-    router.define(root, handler: rootHandler);
     router.define(movieList, handler: movieListHandler);
     router.define("/movie/:id", handler: movieDetailHandler);
     router.define("/actor/:id", handler: actorDetailHandler);
+
 //    router.define(demoSimpleFixedTrans,
 //        handler: demoRouteHandler, transitionType: TransitionType.inFromLeft);
   }

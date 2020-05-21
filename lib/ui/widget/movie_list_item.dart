@@ -1,12 +1,10 @@
+import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:good_flutter_app/model/index.dart';
 import 'package:good_flutter_app/res/colors.dart';
 
 import 'movie_cover_image.dart';
-
-import 'package:base_library/src/util/index.dart';
-
 import 'widget_rating_bar.dart';
 
 

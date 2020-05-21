@@ -28,4 +28,8 @@ class RouterHelper {
     router?.navigateTo(context, path, replace: true);
   }
 
+  static pushWeb(BuildContext context, String title, String url) {
+    push(context, "/web?title=${Uri.encodeComponent(title)}&url=${Uri.encodeComponent(url)}");
+  }
+
 }

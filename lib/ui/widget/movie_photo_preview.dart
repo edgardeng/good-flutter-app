@@ -128,7 +128,8 @@ class _MoviePhotoPreviewState extends State<MoviePhotoPreview> {
                 pageOptions: options,
                 pageController: widget.pageController,
                 onPageChanged: onPageChanged,
-                loadingChild: CupertinoActivityIndicator(),
+                loadingBuilder: ( BuildContext context,
+                    ImageChunkEvent event) { return CupertinoActivityIndicator();}
               ),
               Container(
                 padding: const EdgeInsets.all(20.0),

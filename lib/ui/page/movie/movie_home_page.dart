@@ -22,9 +22,9 @@ class _MovieHomePageState extends State<MovieHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
          appBar: AppBar(
-           brightness: Brightness.light,
+//           brightness: Brightness.light,
            title: Text('首页'),
-           backgroundColor: Color.fromARGB(1, 255, 255, 255),
+//           backgroundColor: Color.fromARGB(1, 255, 255, 255),
           //  app bar 阴影
            elevation: 0,
            actions: <Widget>[

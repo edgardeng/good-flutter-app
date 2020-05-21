@@ -4,21 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-
-//import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-//import 'package:share/share.dart';
-//import 'package:movie_recommend/public.dart';
-class WebViewScene extends StatefulWidget {
+class WebViewPage extends StatefulWidget {
   final String url;
   final String title;
 
-  WebViewScene({@required this.url, this.title});
-
-
-  _WebViewSceneState createState() => _WebViewSceneState();
+  WebViewPage({@required this.url, this.title});
+  _WebViewPageState createState() => _WebViewPageState();
 }
 
-class _WebViewSceneState extends State<WebViewScene> {
+class _WebViewPageState extends State<WebViewPage> {
 
   @override
   void deactivate() {
@@ -37,18 +31,20 @@ class _WebViewSceneState extends State<WebViewScene> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter WebView example'),
+        title: Text(widget.title),
         leading: GestureDetector(
-            onTap: back,
-            child: Icon(Icons.arrow_back),
+          onTap: back,
+          child: Icon(Icons.arrow_back),
         ),
         actions: <Widget>[
           GestureDetector(
-            onTap: () {
+              onTap: () {
 //              Share.share(this.widget.url);
-            },
-            child: Icon(Icons.share),
-          ),
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                child: Icon(Icons.share),
+              )),
         ],
       ),
       // We're using a Builder here so we have a context that is below the Scaffold
@@ -92,7 +88,6 @@ class _WebViewSceneState extends State<WebViewScene> {
       }),
     );
   }
-
    // 返回上个页面
   back() {
     Navigator.pop(context);

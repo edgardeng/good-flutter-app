@@ -1,8 +1,13 @@
 import 'package:base_library/base_library.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:good_flutter_app/common/config.dart';
+import 'package:good_flutter_app/router/index.dart';
 import 'package:good_flutter_app/ui/widget/swiper.dart';
 
+/// 闪屏页
+/// 广告页(默认页) 或者 引导页
+///
 class SplashPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -12,20 +17,14 @@ class SplashPage extends StatefulWidget {
 
 class SplashPageState extends State<SplashPage> {
   TimerUtil _timerUtil;
+  List<String> _guideList;
+  List<Widget> _guideViewList = new List();
 
-  List<String> _guideList = [
-//    Utils.getImgPath('guide1'),
-//    Utils.getImgPath('guide2'),
-//    Utils.getImgPath('guide3'),
-//    Utils.getImgPath('guide4'),
-  ];
-
-  List<Widget> _bannerList = new List();
-
-  int _status = 0;
+  int _status = 0; // 0, 闪频页 1 引导页
   int _count = 3;
 
   SplashModel _splashModel;
+  var isNewVersion = false; // 是否是新版本，是则显示引导页
 
   @override
   void initState() {
@@ -33,21 +32,58 @@ class SplashPageState extends State<SplashPage> {
     _init();
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return new Material(
+      child: new Stack(
+        children: <Widget>[
+          new Offstage(
+            offstage: _status != 0,
+            child: _buildSplashView(),
+          ),
+          new Offstage(
+            offstage: _status != 1,
+            child: _buildGuideView(),
+          ),
+        ],
+      ),
+    );
+  }
+
+
   void _init() {
     _loadSplashData();
-//    Observable.just(1).delay(new Duration(milliseconds: 500)).listen((_) {
-////      SpUtil.putBool(Constant.key_guide, false);
-//      if (SpUtil.getBool(Constant.key_guide, defValue: true) &&
-//          ObjectUtil.isNotEmpty(_guideList)) {
-//        SpUtil.putBool(Constant.key_guide, false);
-//        _initBanner();
-//      } else {
-//        _initSplash();
-//      }
-//    });
+
+    int versionCode = SpUtil.getInt("app.version_code");
+//    String versionName = SpUtil.getString("app.version_name");
+
+    int newVersionCode = Config.versionCode; // 此处要注意 代码中和打包的versionCode是否一致
+    if (newVersionCode > 0) {
+      print("versionCode:" + versionCode.toString());
+      isNewVersion = true;
+      SpUtil.putString("app.version_name", Config.versionName);
+      SpUtil.putInt("app.version_code", newVersionCode);
+      _guideList = [ "assets/image/guide_1.png", "assets/image/guide_2.png", "assets/image/guide_3.png"];
+      _initGuideViews();
+    } //  获取本地存储的版本 和 当前版本 比较
+    print("Config.versionCode:" + Config.versionCode.toString());
+
+    // 计时3秒自动跳转首页
+    _startCountDown();
   }
 
   void _loadSplashData() {
+
+    // TODO 获取广告图片
+    _splashModel = SplashModel(
+        title:"Edgar Deng",
+        url:"https://edgardeng.github.io",
+        img: "https://*");
+//    _splashModel = SplashModel(
+//        title:"站酷",
+//        url:"https://www.zcool.com.cn/work/ZMjQwNTQ3NTI=.html",
+//        img: "https://img.zcool.cn/community/01e9b459c884e3a8012053f8d1eaaa.png");
+
 //    _splashModel = SpUtil.getObj(
 //        Constant.key_splash_model, (v) => SplashModel.fromJson(v));
 //    if (_splashModel != null) {
@@ -68,17 +104,11 @@ class SplashPageState extends State<SplashPage> {
 //    });
   }
 
-  void _initBanner() {
-    _initBannerData();
-    setState(() {
-      _status = 2;
-    });
-  }
-
-  void _initBannerData() {
+  /// 引导页列表
+  void _initGuideViews() {
     for (int i = 0, length = _guideList.length; i < length; i++) {
       if (i == length - 1) {
-        _bannerList.add(new Stack(
+        _guideViewList.add(new Stack(
           children: <Widget>[
             new Image.asset(
               _guideList[i],
@@ -94,17 +124,22 @@ class SplashPageState extends State<SplashPage> {
                   onTap: () {
                     _goMain();
                   },
-                  child: new CircleAvatar(
-                    radius: 48.0,
-                    backgroundColor: Colors.indigoAccent,
-                    child: new Padding(
-                      padding: EdgeInsets.all(2.0),
-                      child: new Text(
-                        '立即体验',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 16.0),
-                      ),
+                  child: Container(
+                    margin: EdgeInsets.only(left: 40, top: 40),
+                    //设置 child 居中
+                    alignment: Alignment(0, 0),
+                    height: 50,
+                    width: 300,
+                    //边框设置
+                    decoration: new BoxDecoration(
+                      //背景
+                      color: Colors.green,
+                      //设置四周圆角 角度
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      //设置四周边框
+//                      border: new Border.all(width: 1, color: Colors.red),
                     ),
+                    child: Text("立即体验", style: TextStyle(color: Colors.white, fontSize: 16.0)),
                   ),
                 ),
               ),
@@ -112,7 +147,7 @@ class SplashPageState extends State<SplashPage> {
           ],
         ));
       } else {
-        _bannerList.add(new Image.asset(
+        _guideViewList.add(new Image.asset(
           _guideList[i],
           fit: BoxFit.fill,
           width: double.infinity,
@@ -122,125 +157,124 @@ class SplashPageState extends State<SplashPage> {
     }
   }
 
-  void _initSplash() {
-    if (_splashModel == null) {
-      _goMain();
-    } else {
-      _doCountDown();
-    }
-  }
-
-  void _doCountDown() {
-    setState(() {
-      _status = 1;
-    });
+  // 启动倒计时
+  void _startCountDown() {
     _timerUtil = new TimerUtil(mTotalTime: 3 * 1000);
     _timerUtil.setOnTimerTickCallback((int tick) {
+      print("_timerUtil:" + tick.toString());
       double _tick = tick / 1000;
       setState(() {
-        _count = _tick.toInt();
+        _count = _tick.toInt(); // 显示倒计时间
       });
       if (_tick == 0) {
-        _goMain();
+        // 时间到
+        if (isNewVersion) {
+//          setState(() {
+//            _status = 1; // 显示引导页
+//          });
+        } else {
+          RouterHelper.replace(context, "/main");
+        }
       }
     });
     _timerUtil.startCountDown();
   }
 
-  void _goMain() {
-    RouteUtil.goMain(context);
-  }
-
-  Widget _buildSplashBg() {
-    return new Image.asset(
-      "splash_bg",
-//      Utils.getImgPath('splash_bg'),
-      width: double.infinity,
+  Widget _defaultAdImageView() {
+    return Image.asset(
+      "assets/image/splash_bg.png",
+      width: Screen.width,
       fit: BoxFit.fill,
-      height: double.infinity,
+      height: Screen.height,
     );
   }
 
-  Widget _buildAdWidget() {
-    if (_splashModel == null) {
-      return new Container(
-        height: 0.0,
+  /// 闪屏页
+  Widget _buildSplashView() {
+    // 上面图片，下面版本号
+    return
+      Stack(
+        children: <Widget>[
+          Positioned(
+            top: 0,
+            child: InkWell(
+              onTap: () {
+                _goMain();
+                RouterHelper.pushWeb(context, _splashModel.title, _splashModel.url);
+              },
+          child:new Container(
+              alignment: Alignment.center,
+              child: new CachedNetworkImage(
+                width: double.infinity,
+                height: double.infinity,
+                fit: BoxFit.fill,
+                imageUrl: _splashModel?.img,
+                placeholder: (context, url) => _defaultAdImageView(),
+                errorWidget: (context, url, error) => _defaultAdImageView(),
+              )))
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              width: Screen.width,
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.all(30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(Config.appName,style: TextStyle(fontSize: 24, color: Colors.green),),
+                    Gaps.hGap15,
+                    Text(Config.versionName)
+                  ],
+                ),
+              )
+            ),
+          ),
+          Positioned(
+            top: 40,
+            right: 15,
+            child: new Text(_count.toString() + "s",
+              style: new TextStyle(fontSize: 16, color: Colors.deepOrange)
+            ),
+    )
+        ],
+      );
+  }
+
+  /// 引导页
+  Widget _buildGuideView() {
+    if (ObjectUtil.isEmpty(_guideViewList)) {
+      return Center(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: RoundButton(
+              text:'立即体验',
+              onPressed: (){
+                _goMain();
+              }
+          )
+        )
+      );
+    } else {
+      return new Swiper(
+          autoStart: false,
+          circular: false,
+          indicator: CircleSwiperIndicator(
+            radius: 4.0,
+            padding: EdgeInsets.only(bottom: 30.0),
+            itemActiveColor: Colors.green,
+            itemColor: Colors.grey,
+          ),
+          children: _guideViewList
       );
     }
-    return new Offstage(
-      offstage: !(_status == 1),
-      child: new InkWell(
-        onTap: () {
-          if (ObjectUtil.isEmpty(_splashModel.url)) return;
-          _goMain();
-//          NavigatorUtil.pushWeb(context, title: _splashModel.title, url: _splashModel.url);
-        },
-        child: new Container(
-          alignment: Alignment.center,
-          child: new CachedNetworkImage(
-            width: double.infinity,
-            height: double.infinity,
-            fit: BoxFit.fill,
-            imageUrl: _splashModel.img,
-            placeholder: (context, url) => _buildSplashBg(),
-            errorWidget: (context, url, error) => _buildSplashBg(),
-          ),
-        ),
-      ),
-    );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return new Material(
-      child: new Stack(
-        children: <Widget>[
-          new Offstage(
-            offstage: !(_status == 0),
-            child: _buildSplashBg(),
-          ),
-          new Offstage(
-            offstage: !(_status == 2),
-            child: ObjectUtil.isEmpty(_bannerList)
-                ? new Container()
-                : new Swiper(
-                autoStart: false,
-                circular: false,
-                indicator: CircleSwiperIndicator(
-                  radius: 4.0,
-                  padding: EdgeInsets.only(bottom: 30.0),
-                  itemColor: Colors.black26,
-                ),
-                children: _bannerList),
-          ),
-          _buildAdWidget(),
-          new Offstage(
-            offstage: !(_status == 1),
-            child: new Container(
-              alignment: Alignment.bottomRight,
-              margin: EdgeInsets.all(20.0),
-              child: InkWell(
-                onTap: () {
-                  _goMain();
-                },
-                child: new Container(
-                    padding: EdgeInsets.all(12.0),
-                    child: new Text(_count.toString(),
-//                      IntlUtil.getString(context, Ids.jump_count, params: ['$_count']),
-                      style: new TextStyle(fontSize: 14.0, color: Colors.white),
-                    ),
-                    decoration: new BoxDecoration(
-                        color: Color(0x66000000),
-                        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-                        border: new Border.all(
-                            width: 0.33, color: Colours.divider))),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+  void _goMain() {
+    RouterHelper.replace(context, "/home");
   }
+
 
   @override
   void dispose() {
@@ -248,8 +282,6 @@ class SplashPageState extends State<SplashPage> {
     if (_timerUtil != null) _timerUtil.cancel(); //记得在dispose里面把timer cancel。
   }
 }
-
-
 
 class SplashModel {
   String title;

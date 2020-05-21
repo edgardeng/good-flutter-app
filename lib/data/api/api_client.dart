@@ -1,12 +1,7 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'dart:async';
 
 import 'package:good_flutter_app/model/index.dart';
-//import 'package:html/dom.dart' as dom;
-//import 'package:html/parser.dart' show parse;
-//import 'package:http/http.dart' as http;
-//import 'package:movie_recommend/model/movie_news.dart';
 
 class ApiClient {
   static const String baseUrl = 'https://douban.uieee.com/v2/movie/';

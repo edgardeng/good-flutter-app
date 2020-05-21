@@ -1,7 +1,5 @@
-import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/res/icons.dart';
-import 'package:good_flutter_app/ui/page/index.dart';
 
 import 'movie/cinema_page.dart';
 import 'movie/movie_home_page.dart';

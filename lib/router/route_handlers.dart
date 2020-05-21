@@ -1,12 +1,6 @@
-//import '../helpers/color_helpers.dart';
-//import '../components/demo/demo_simple_component.dart';
-//import '../components/home/home_component.dart';
-import 'package:flutter/painting.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/ui/page/index.dart';
-
-import '';
 
 /// 路由的处理
 ///
@@ -16,6 +10,7 @@ var rootHandler = Handler(
   return HomePage();
 });
 
+var splashHandler = Handler(handlerFunc: (_, params) => SplashPage());
 var loginHandler = Handler(handlerFunc: (_, params) => LoginPage());
 
 var movieListHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -32,6 +27,11 @@ var actorDetailHandler = Handler(handlerFunc: (BuildContext context, Map<String,
   return ActorDetailPage(id: params["id"][0]);
 });
 
+var webHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  String title = params["title"]?.first;
+  String url = params["url"]?.first;
+  return WebViewPage(title: title, url: url);
+});
 
 //var demoRouteHandler = Handler(
 //    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
