@@ -23,9 +23,16 @@ class _AppState extends State<GoodFlutterApp> {
     final app = MaterialApp(
       title: 'Good Flutter App',
       debugShowCheckedModeBanner: false, // 显示bug标志
-      theme: ThemeData.light().copyWith(
-        primaryColor: Color(0xFF57bd56),
+      theme:
+      new ThemeData(
+        primarySwatch: Colors.green, // 主题色
+        primaryColor: Colors.white, // app bar
+        accentColor: const Color(0xFF2196f3),
+        canvasColor: const Color(0xFFF0F0F0),
       ),
+//      ThemeData.light().copyWith(
+//        primaryColor: Color(0xFF57bd56),
+//      ),
       onGenerateRoute: RouterHelper.router.generator,
     );
 

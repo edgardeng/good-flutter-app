@@ -58,15 +58,14 @@ class SplashPageState extends State<SplashPage> {
 //    String versionName = SpUtil.getString("app.version_name");
 
     int newVersionCode = Config.versionCode; // 此处要注意 代码中和打包的versionCode是否一致
-    if (newVersionCode > 0) {
-      print("versionCode:" + versionCode.toString());
+    if (newVersionCode > versionCode) {
+      print("find New Version: " + Config.versionName);
       isNewVersion = true;
       SpUtil.putString("app.version_name", Config.versionName);
       SpUtil.putInt("app.version_code", newVersionCode);
       _guideList = [ "assets/image/guide_1.png", "assets/image/guide_2.png", "assets/image/guide_3.png"];
       _initGuideViews();
     } //  获取本地存储的版本 和 当前版本 比较
-    print("Config.versionCode:" + Config.versionCode.toString());
 
     // 计时3秒自动跳转首页
     _startCountDown();
@@ -169,9 +168,9 @@ class SplashPageState extends State<SplashPage> {
       if (_tick == 0) {
         // 时间到
         if (isNewVersion) {
-//          setState(() {
-//            _status = 1; // 显示引导页
-//          });
+          setState(() {
+            _status = 1; // 显示引导页
+          });
         } else {
           RouterHelper.replace(context, "/main");
         }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/res/icons.dart';
 
 import 'movie/cinema_page.dart';
@@ -92,6 +93,9 @@ class _HomePageState extends State<HomePage> {
         physics: NeverScrollableScrollPhysics(), // 禁止滑动
       ),
       bottomNavigationBar: BottomNavigationBar(
+//        selectedIconTheme: IconThemeData(color: AppColor.primary),
+//        selectedLabelStyle: TextStyle(color: AppColor.primary),
+        selectedItemColor: AppColor.primary,
         items: _bottomBarItems.map((BottomBarItem bottomBarItem) {
           return BottomNavigationBarItem(
               icon: bottomBarItem.icon, title: Text(bottomBarItem.title));
