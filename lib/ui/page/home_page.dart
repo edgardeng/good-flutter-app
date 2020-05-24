@@ -4,8 +4,8 @@ import 'package:good_flutter_app/res/icons.dart';
 
 import 'movie/cinema_page.dart';
 import 'movie/movie_home_page.dart';
+import 'movie/movie_rank_page.dart';
 import 'user/my_page.dart';
-import 'home/star_page.dart';
 
 /// 首页 - 4个标签：
 ///
@@ -26,10 +26,10 @@ final List<BottomBarItem> _bottomBarItems = <BottomBarItem>[
       icon: Icon(XDIcons.movie),
       widget: MovieHomePage()),
   BottomBarItem(
-      title: '明星',
-      name: 'cinema',
+      title: '榜单',
+      name: 'rank',
       icon: Icon(XDIcons.super_star),
-      widget: StarPage()),
+      widget: MovieRankPage()),
   BottomBarItem(
       title: '影院',
       name: 'star',

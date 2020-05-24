@@ -12,8 +12,9 @@ class GoodFlutterApp extends StatefulWidget {
 class _AppState extends State<GoodFlutterApp> {
 
   _AppState() {
-    RouterHelper.setRouter(Router());// 全局静态
+    RouterHelper.setRouter(Router());// 初始化路由
     LogUtil.e("_AppState Init ");
+    SpUtil.getInstance(); // 初始化 SpUtil
   }
 
   @override

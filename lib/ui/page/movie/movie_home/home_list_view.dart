@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:good_flutter_app/data/api/api_client.dart';
 
 import 'movie_three_grid_view.dart';
-//import 'movie_top_scroll_view.dart';
 import 'home_news_banner_view.dart';
 
 

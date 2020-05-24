@@ -41,6 +41,8 @@ dependencies:
   chewie: ^0.9.10
   # A Flutter plugin that provides a WebView widget.
   webview_flutter: ^0.3.22
+  # location
+  location: ^3.0.0
 
   base_library:
       path: ./base_library/

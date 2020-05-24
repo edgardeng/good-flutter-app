@@ -32,4 +32,8 @@ class RouterHelper {
     push(context, "/web?title=${Uri.encodeComponent(title)}&url=${Uri.encodeComponent(url)}");
   }
 
+  static pushLogin(BuildContext context) {
+    push(context, "/login");
+  }
+
 }

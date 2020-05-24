@@ -119,7 +119,7 @@ class _ActorDetailPageState extends State<ActorDetailPage> {
           width: 44,
           height: Screen.navigationBarHeight,
           padding: EdgeInsets.fromLTRB(5, Screen.topSafeHeight, 0, 0),
-          child: GestureDetector(onTap: back, child: Image.asset('images/icon_arrow_back_white.png')),
+          child: GestureDetector(onTap: back, child: Icon(Icons.arrow_back)),
         ),
         Opacity(
           opacity: navAlpha,
@@ -131,7 +131,7 @@ class _ActorDetailPageState extends State<ActorDetailPage> {
               children: <Widget>[
                 Container(
                   width: 44,
-                  child: GestureDetector(onTap: back, child: Image.asset('images/icon_arrow_back_white.png')),
+                  child: GestureDetector(onTap: back, child: Icon(Icons.arrow_back)),
                 ),
                 Expanded(
                   child: Text(

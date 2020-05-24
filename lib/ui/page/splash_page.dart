@@ -54,21 +54,24 @@ class SplashPageState extends State<SplashPage> {
   void _init() {
     _loadSplashData();
 
+    // 计时3秒自动跳转首页
+    _startCountDown();
+  }
+
+  void _checkNewVersion() {
     int versionCode = SpUtil.getInt("app.version_code");
-//    String versionName = SpUtil.getString("app.version_name");
+    String versionName = SpUtil.getString("app.version_name");
+//    print("Old code: " + versionCode.toString() + " name: " + versionName);
 
     int newVersionCode = Config.versionCode; // 此处要注意 代码中和打包的versionCode是否一致
     if (newVersionCode > versionCode) {
-      print("find New Version: " + Config.versionName);
+//      print("find New Version: " + Config.versionName);
       isNewVersion = true;
       SpUtil.putString("app.version_name", Config.versionName);
       SpUtil.putInt("app.version_code", newVersionCode);
       _guideList = [ "assets/image/guide_1.png", "assets/image/guide_2.png", "assets/image/guide_3.png"];
       _initGuideViews();
     } //  获取本地存储的版本 和 当前版本 比较
-
-    // 计时3秒自动跳转首页
-    _startCountDown();
   }
 
   void _loadSplashData() {
@@ -159,20 +162,21 @@ class SplashPageState extends State<SplashPage> {
   // 启动倒计时
   void _startCountDown() {
     _timerUtil = new TimerUtil(mTotalTime: 3 * 1000);
+    _timerUtil.setInterval(1000);
     _timerUtil.setOnTimerTickCallback((int tick) {
-      print("_timerUtil:" + tick.toString());
       double _tick = tick / 1000;
       setState(() {
         _count = _tick.toInt(); // 显示倒计时间
       });
       if (_tick == 0) {
+        _checkNewVersion();
         // 时间到
         if (isNewVersion) {
           setState(() {
             _status = 1; // 显示引导页
           });
         } else {
-          RouterHelper.replace(context, "/main");
+          _goMain();
         }
       }
     });

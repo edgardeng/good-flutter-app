@@ -10,6 +10,7 @@ class Routes {
   static String home = "/home";
   static String login = "/login";
   static String web = "/web";
+  static String video = "/video";
 //  static String splash = "/splash";
   static String movieList = "/movie";
   static void configureRoutes(Router router) {
@@ -22,6 +23,7 @@ class Routes {
     router.define(web, handler: webHandler);
     router.define(home, handler: rootHandler);
     router.define(login, handler: loginHandler);
+    router.define(video, handler: vieoHandler);
     router.define(movieList, handler: movieListHandler);
     router.define("/movie/:id", handler: movieDetailHandler);
     router.define("/actor/:id", handler: actorDetailHandler);

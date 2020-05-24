@@ -34,7 +34,7 @@ class _MovieClassifyListViewState extends State<MovieClassifyListView> {
           elevation: 0,
           leading: GestureDetector(
             onTap: back,
-            child: Image.asset('images/icon_arrow_back_black.png'),
+            child: Icon(Icons.arrow_back),
           ),
         ),
         body: Container(

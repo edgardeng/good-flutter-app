@@ -33,6 +33,11 @@ var webHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<St
   return WebViewPage(title: title, url: url);
 });
 
+var vieoHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  String url = params["url"]?.first;
+  return MovieVideoPage(url: url);
+});
+
 //var demoRouteHandler = Handler(
 //    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //  String message = params["message"]?.first;

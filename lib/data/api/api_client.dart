@@ -53,50 +53,46 @@ class ApiClient {
     return movies;
   }
 
-
-  // 获取本周口碑榜电影
-  Future<dynamic> getWeeklyList() async {
-    Response<Map> response = await dio.get('weekly');
-    List content =response.data['subjects'];
-    List movies = [];
+  List<MovieItem> getRankMovieList(var list) {
+    List content = list;
+    List<MovieItem> movies = [];
     content.forEach((data) {
-      movies.add(data['subject']);
+      movies.add(MovieItem.fromJson(data["subject"]));
     });
     return movies;
   }
 
-  Future<Map> get(String path,  Map<String, dynamic> params) async {
+  Future<Map> get(String path,  {Map<String, dynamic> params}) async {
     print(" --- DIO --- ");
-    print("GET: " + path);
+    print("GET: " + baseUrl + "/" + path);
     Response<Map> response = await dio.get(path, queryParameters: params);
-    print("Response: " + response.data.toString());
+//    print("Response: " + response.data.toString());
     return response.data;
   }
 
 
+  // 获取本周口碑榜电影
+  Future<dynamic> getWeeklyList() async {
+    Map<String, dynamic> data = await get('weekly');
+    return getRankMovieList(data['subjects']);
+  }
   // 获取新片榜电影
   Future<dynamic> getNewMoviesList() async {
-    Response<Map> response = await dio.get('new_movies');
-    return response.data['subjects'];
+    Map<String, dynamic> data = await get('new_movies');
+    return getMovieList(data['subjects']);
   }
 
   // 获取北美票房榜电影
   Future<dynamic> getUsBoxList() async {
-    Response<Map> response = await dio.get('us_box');
-    List content =response.data['subjects'];
-    List movies = [];
-    content.forEach((data) {
-      movies.add(data['subject']);
-    });
-    return movies;
+    Map<String, dynamic> data = await get('us_box');
+    return getRankMovieList(data['subjects']);
   }
 
   // 获取 top250 榜单
   Future<dynamic> getTop250List({int start, int count}) async {
-    Response<Map> response = await dio.get('top250', queryParameters: {'start':start, 'count':count});
-    return response.data['subjects'];
+    Map<String, dynamic> data = await get('top250', params: {'start':start, 'count':count});
+    return getMovieList(data['subjects']);
   }
-
 
   // 根据标签搜索
   Future<dynamic> getSearchListByTag({String tag, int start, int count}) async {

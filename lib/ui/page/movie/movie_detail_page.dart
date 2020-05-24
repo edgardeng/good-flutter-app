@@ -7,9 +7,6 @@ import 'package:good_flutter_app/model/index.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:good_flutter_app/res/colors.dart';
-
-//import 'package:movie_recommend/public.dart';
-
 import 'movie_detail/movie_detail_header.dart';
 import 'movie_detail/movie_detail_tag.dart';
 import 'movie_detail/movie_summary_view.dart';
@@ -20,7 +17,6 @@ import 'movie_detail/movie_detail_comment.dart';
 class MovieDetailPage extends StatefulWidget {
   // 电影 id
   final String id;
-
 
   const MovieDetailPage({Key key, this.id}) : super(key: key);
 
@@ -71,7 +67,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           elevation: 0,
           leading: GestureDetector(
             onTap: back,
-            child: Image.asset('images/icon_arrow_back_black.png'),
+            child: Icon(Icons.arrow_back),
           ),
         ),
         body: Center(
@@ -117,7 +113,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
           width: 44,
           height: Screen.navigationBarHeight,
           padding: EdgeInsets.fromLTRB(5, Screen.topSafeHeight, 0, 0),
-          child: GestureDetector(onTap: back, child: Image.asset('images/icon_arrow_back_white.png')),
+          child: GestureDetector(onTap: back, child: Icon(Icons.arrow_back)),
         ),
         Opacity(
           opacity: navAlpha,
@@ -129,7 +125,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               children: <Widget>[
                 Container(
                   width: 44,
-                  child: GestureDetector(onTap: back, child: Image.asset('images/icon_arrow_back_white.png')),
+                  child: GestureDetector(onTap: back, child: Icon(Icons.arrow_back)),
                 ),
                 Expanded(
                   child: Text(

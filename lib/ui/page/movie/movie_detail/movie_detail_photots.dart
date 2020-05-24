@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:good_flutter_app/model/index.dart';
 import 'package:good_flutter_app/res/colors.dart';
+import 'package:good_flutter_app/router/index.dart';
 import 'package:good_flutter_app/util/utility.dart';
 
 class MovieDetailPhotots extends StatelessWidget {
@@ -84,10 +85,7 @@ class MovieDetailPhotots extends StatelessWidget {
 class TrailerItem extends StatelessWidget {
 
   final MovieTrailer trailer;
-
   TrailerItem(this.trailer);
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -95,6 +93,7 @@ class TrailerItem extends StatelessWidget {
       margin: EdgeInsets.only(left: 15, bottom: 15),
       child:GestureDetector(
         onTap: () {
+          RouterHelper.push(context, "/video?url=" + Uri.encodeComponent(trailer.trailerUrl));
 //          AppNavigator.push(context, MovieVideoPlay(url: trailer.trailerUrl,));
         },
         child: Stack(
@@ -133,8 +132,6 @@ class TrailerItem extends StatelessWidget {
       ),
     );
   }
-
-  
 }
 
 class PhotoItem extends StatelessWidget {

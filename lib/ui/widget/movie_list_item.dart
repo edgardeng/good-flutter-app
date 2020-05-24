@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:good_flutter_app/model/index.dart';
 import 'package:good_flutter_app/res/colors.dart';
+import 'package:good_flutter_app/router/index.dart';
 
 import 'movie_cover_image.dart';
 import 'widget_rating_bar.dart';
@@ -68,6 +69,7 @@ class MovieListItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
+        RouterHelper.push(context, "/movie/" + movie.id);
 //        AppNavigator.pushMovieDetail(context, movie);
       },
       child: Container(

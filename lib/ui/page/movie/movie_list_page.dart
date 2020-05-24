@@ -77,6 +77,7 @@ class _MovieListPageState extends State<MovieListPage> {
         itemCount: movieList.length,
         itemBuilder: (BuildContext context, int index) {
           if (index+1 == movieList.length) {
+            // 加载更多
             return Container(
               padding: EdgeInsets.all(10),
               child: Center(
@@ -107,6 +108,18 @@ class _MovieListPageState extends State<MovieListPage> {
         break;
       case 'coming_soon':
         data = await client.getComingList(start: start, count: count);
+        break;
+      case 'weekly':
+        data = await client.getWeeklyList();
+        break;
+      case 'top250':
+        data =  await client.getTop250List(start: start, count: count);
+        break;
+      case 'new_movies':
+        data =  await client.getNewMoviesList();
+        break;
+      case 'us_box':
+        data =  await client.getUsBoxList();
         break;
       case 'search':
         data = await client.getSearchListByTag(tag: title, start: start, count: count);
