@@ -38,7 +38,6 @@ class HomeSectionView extends StatelessWidget {
               } else {
                 String path = "/movie?title=${Uri.encodeComponent(title)}&action=${Uri.encodeComponent(action)}";
                 RouterHelper.push(context, path);
-//                AppNavigator.pushMovieList(context, title, action);
               }
             },
             child: Row(

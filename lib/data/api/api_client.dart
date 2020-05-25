@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'dart:async';
-
 import 'package:good_flutter_app/model/index.dart';
+import 'package:flutter/services.dart';
+
 
 class ApiClient {
   static const String baseUrl = 'https://douban.uieee.com/v2/movie/';
@@ -142,6 +145,16 @@ class ApiClient {
     return photos;
   }
 
+  // 获取影院
+  Future<dynamic> getCinemas(double lat, double lon, String cityCode) async {
+    String value = await rootBundle.loadString('assets/data/cinemas.json');
+    List list = json.decode(value);
+    List<Cinema> photos = [];
+    list.forEach((data) {
+      photos.add(Cinema.fromJson(data));
+    });
+    return photos;
+  }
 
 
   static Dio createDio() {

@@ -13,11 +13,28 @@ class RouterHelper {
     Routes.configureRoutes(router); // 路由配置
   }
 
-  static push(BuildContext context, String path) {
+  static Future push(BuildContext context, String path) {
+    print('RouterHelper push: ' + path);
+//    FocusScope.of(context).requestFocus(new FocusNode());
+    return router?.navigateTo(context, path);
+  }
+
+  static pushAnd(BuildContext context, String path) {
     print('RouterHelper push: ' + path);
 //    FocusScope.of(context).requestFocus(new FocusNode());
     router?.navigateTo(context, path);
   }
+
+
+//  Application.router
+//      .navigateTo(context, route, transition: transitionType)
+//      .then((result) {
+//  if (key == "pop-result") {
+//  Application.router.navigateTo(context, "/demo/func?message=$result");
+//  }
+//  });
+
+
 
   static pop(BuildContext context) {
     Navigator.pop(context);

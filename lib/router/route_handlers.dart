@@ -38,6 +38,10 @@ var vieoHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<S
   return MovieVideoPage(url: url);
 });
 
+var citySelectHandler = Handler(handlerFunc: (_, params) => CitySelectPage());
+var settingsHandler = Handler(handlerFunc: (_, params) => SettingsPage());
+
+
 //var demoRouteHandler = Handler(
 //    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
 //  String message = params["message"]?.first;

@@ -62,14 +62,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
 
     if (movieDetail == null) {
       return Scaffold(
-        
-        appBar: AppBar(
-          elevation: 0,
-          leading: GestureDetector(
-            onTap: back,
-            child: Icon(Icons.arrow_back),
-          ),
-        ),
         body: Center(
           child: CupertinoActivityIndicator(
           ),

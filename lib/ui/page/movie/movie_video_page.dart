@@ -1,61 +1,66 @@
-import 'package:video_player/video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:chewie/chewie.dart';
+import 'package:video_player/video_player.dart';
 
 class MovieVideoPage extends StatefulWidget {
   final String url;
 
   const MovieVideoPage({Key key, this.url}) : super(key: key);
-
-  
   @override
   _MovieVideoPageState createState() => _MovieVideoPageState();
 }
 
 class _MovieVideoPageState extends State<MovieVideoPage> {
-  VideoPlayerController _controller;
+
+  VideoPlayerController videoPlayerController;
+  ChewieController chewieController;
 
   @override
   void initState() {
-    super.initState();// 'http://www.sample-videos.com/video123/mp4/720/big_buck_bunny_720p_20mb.mp4';
-    _controller = VideoPlayerController.network(widget.url)
-      ..initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-      });
-  }
+    super.initState();
+    videoPlayerController = VideoPlayerController.network(this.widget.url);
+    chewieController = ChewieController(
+      videoPlayerController: videoPlayerController,
+      aspectRatio: 3 / 2,
+      autoPlay: true,
+      looping: true,
+      // Try playing around with some of these other options:
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Video Demo',
-      home: Scaffold(
-        body: Center(
-          child: _controller.value.initialized
-              ? AspectRatio(
-            aspectRatio: _controller.value.aspectRatio,
-            child: VideoPlayer(_controller),
-          )
-              : Container(),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              _controller.value.isPlaying
-                  ? _controller.pause()
-                  : _controller.play();
-            });
-          },
-          child: Icon(
-            _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-          ),
-        ),
-      ),
+      // showControls: false,
+      // materialProgressColors: ChewieProgressColors(
+      //   playedColor: Colors.red,
+      //   handleColor: Colors.blue,
+      //   backgroundColor: Colors.grey,
+      //   bufferedColor: Colors.lightGreen,
+      // ),
+      // placeholder: Container(
+      //   color: Colors.grey,
+      // ),
+      // autoInitialize: true,
     );
   }
 
   @override
   void dispose() {
+    videoPlayerController.dispose();
+    chewieController.dispose();
     super.dispose();
-    _controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+          decoration: BoxDecoration(
+              color: Colors.black
+          ),
+          constraints: BoxConstraints.expand(
+            height: MediaQuery.of(context).size.height,
+          ),
+          child: Chewie(
+              controller: chewieController
+          )
+      ),
+    );
   }
 }

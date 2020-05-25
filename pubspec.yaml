@@ -66,6 +66,7 @@ flutter:
   assets:
     - packages/base_library/assets/ic_login_bg.png
     - assets/image/
+    - assets/data/
   fonts:
     - family: IconFont
       fonts:

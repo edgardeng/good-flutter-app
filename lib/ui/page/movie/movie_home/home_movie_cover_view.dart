@@ -2,6 +2,7 @@ import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/model/index.dart';
 import 'package:good_flutter_app/res/colors.dart';
+import 'package:good_flutter_app/router/index.dart';
 import 'package:good_flutter_app/ui/widget/index.dart';
 
 
@@ -19,7 +20,7 @@ class HomeMovieCoverView extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-//        AppNavigator.pushMovieDetail(context, movie);
+        RouterHelper.push(context, "/movie/" + movie.id);
       },
       child: Container(
         width: width,

@@ -1,5 +1,6 @@
 class User {
   String token;
+  String username;
   int id;
   String nickname;
   String avatarUrl;

@@ -1,5 +1,6 @@
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
+import 'package:good_flutter_app/res/colors.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -76,6 +77,7 @@ class LoginBody extends StatelessWidget {
                     hintText: "密码",
                   ),
                   new RoundButton(
+                    bgColor: AppColor.primary,
                     text: "登录",
                     margin: EdgeInsets.only(top: 20),
                     onPressed: () {

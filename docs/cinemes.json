@@ -1,0 +1,84 @@
+[
+  {
+    "id": "001",
+    "name": "万达影城（五角场万达广场店",
+    "address": "杨浦区淞沪路77号万达广场3层",
+    "distance": "500m",
+    "refund": true,
+    "endorse": true,
+    "vip": true,
+    "snack": true
+  },
+  {
+    "id": "002",
+    "name": "SFC上影百联影城（又一城店）",
+    "address": "杨浦区淞沪路8号百联又一城购物中心8楼",
+    "distance": "600m",
+    "refund": true,
+    "endorse": true,
+    "vip": true,
+    "snack": true
+  },
+  {
+    "id": "003",
+    "name": "苏宁影城（上海五角场店）",
+    "address": "杨浦区邯郸路585号苏宁广场4楼",
+    "distance": "600m",
+    "endorse": true,
+    "vip": true,
+    "snack": true
+  },
+  {
+    "id": "004",
+    "name": "中影国际影城（合生汇店）",
+    "address": "杨浦区翔殷路1099号合生汇4楼",
+    "distance": "900m",
+    "endorse": true,
+    "snack": true
+  },
+  {
+    "id": "005",
+    "name": "SFC上影影城（国华广场店）",
+    "address": "杨浦区闸殷路1555号国华广场4楼",
+    "distance": "1.1km",
+    "refund": true,
+    "endorse": true,
+    "vip": true
+  },
+  {
+    "id": "006",
+    "name": "博纳国际影城（中原店）",
+    "address": "杨浦区国和路777号中原城市广场2座4层",
+    "distance": "1.9km",
+    "refund": true,
+    "endorse": true,
+    "vip": true
+  },
+  {
+    "id": "007",
+    "name": "上海东融国际影城",
+    "address": "杨浦区黄兴路1616号主楼1层",
+    "distance": "2.1km",
+    "refund": true,
+    "endorse": true,
+    "vip": true
+  },
+  {
+    "id": "008",
+    "name": "红星电影世界（上海百联曲阳店）",
+    "address": "虹口区中山北二路1818号6层",
+    "distance": "2.4km",
+    "refund": true,
+    "endorse": true,
+    "vip": true
+  },
+  {
+    "id": "009",
+    "name": "大光明电影院（宝山店）",
+    "address": "宝山区殷高路65号3楼（殷高西路地铁站）",
+    "distance": "2.8km",
+    "refund": true,
+    "endorse": true,
+    "vip": true
+  }
+]

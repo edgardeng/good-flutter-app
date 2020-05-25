@@ -10,3 +10,5 @@ export 'movie_detail.dart';
 export 'movie_image.dart';
 export 'movie_trailer.dart';
 export 'movie_photo.dart';
+export 'cinema.dart';
+export 'user.dart';
