@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/common/constant.dart';
@@ -61,7 +60,7 @@ class LoginBody extends StatelessWidget {
       if (user != null) {
         SpUtil.putString(USER_INFO, json.encode(user.toJson()));
         Future.delayed(new Duration(milliseconds: 500), () {
-          RouterHelper.pop(context);
+          Navigator.pop(context, true);
         });
       } else {
         Util.showSnackBar(context, "用户名或密码错误");

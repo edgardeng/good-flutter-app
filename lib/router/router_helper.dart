@@ -14,33 +14,18 @@ class RouterHelper {
 
   static Future push(BuildContext context, String path) {
     print('RouterHelper push: ' + path);
-//    FocusScope.of(context).requestFocus(new FocusNode());
     return router?.navigateTo(context, path);
   }
-
-  static pushAnd(BuildContext context, String path) {
-    print('RouterHelper push: ' + path);
-//    FocusScope.of(context).requestFocus(new FocusNode());
-    router?.navigateTo(context, path);
-  }
-
-
-//  Application.router
-//      .navigateTo(context, route, transition: transitionType)
-//      .then((result) {
-//  if (key == "pop-result") {
-//  Application.router.navigateTo(context, "/demo/func?message=$result");
-//  }
-//  });
-
-
 
   static pop(BuildContext context) {
     Navigator.pop(context);
   }
 
+  static popResult(BuildContext context, dynamic result) {
+    Navigator.pop(context, result);
+  }
+
   static replace(BuildContext context, String path) {
-//    FocusScope.of(context).requestFocus(new FocusNode());
     router?.navigateTo(context, path, replace: true);
   }
 
@@ -49,7 +34,7 @@ class RouterHelper {
   }
 
   static pushLogin(BuildContext context) {
-    push(context, "/login");
+    return push(context, "/login");
   }
 
 }

@@ -31,7 +31,7 @@ class ClickItem extends StatelessWidget {
           // 无点击事件时，隐藏箭头图标
           opacity: icon == null ? 0 : 1,
           child: Padding(
-            padding: EdgeInsets.only(top: maxLines == 1 ? 0.0 : 2.0, right: 5),
+            padding: EdgeInsets.only(top: maxLines == 1 ? 0.0 : 2.0, right: 10),
             child: icon,
           ),
         ),

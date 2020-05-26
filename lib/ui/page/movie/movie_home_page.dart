@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:good_flutter_app/ui/page/search/movie_search_delegate.dart';
-
 import 'movie_home/home_list_view.dart';
 
 
@@ -22,10 +21,7 @@ class _MovieHomePageState extends State<MovieHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
          appBar: AppBar(
-//           brightness: Brightness.light,
-           title: Text('首页'),
-//           backgroundColor: Color.fromARGB(1, 255, 255, 255),
-          //  app bar 阴影
+           title: Text('电影'),
            elevation: 0,
            actions: <Widget>[
              IconButton(

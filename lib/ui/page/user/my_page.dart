@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:good_flutter_app/common/config.dart';
 import 'package:good_flutter_app/common/constant.dart';
 import 'package:good_flutter_app/model/index.dart';
 import 'package:good_flutter_app/res/icons.dart';
-import 'dart:ui' as ui;
 import 'package:good_flutter_app/router/index.dart';
 
 class MyPage extends StatefulWidget {
@@ -43,15 +43,13 @@ class _MyPageState extends State<MyPage> with RouteAware{
                 padding: EdgeInsets.only(top: 0),
                 children: <Widget>[
                   _buildHeader(),
-                  Divider(height: 20, color: Colors.transparent,),
+                  Gaps.vGap10,
                   ClickItem(
                     icon: Icon(XDIcons.github),
                     title: 'Github',
                     onTap: () => RouterHelper.pushWeb(context, 'good-flutter-app', 'https://github.com/edgardeng/good-flutter-app')
                   ),
-                  Gaps.vGap5,
                   ClickItem(icon: Icon(XDIcons.sofa), title: '看电影', onTap: (){} ),
-                  Gaps.vGap5,
                   ClickItem(
                     icon: Icon(Icons.edit),
                       title: '我的发布',
@@ -67,6 +65,18 @@ class _MyPageState extends State<MyPage> with RouteAware{
                       title: '我的关注',
                       onTap: (){}
                   ),
+                  Gaps.vGap5,
+                  Center(child: Text("版本 v" + Config.versionName, style: TextStyle(),)),
+                  Opacity(
+                      opacity: user != null ? 1 : 0,
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        child: RoundButton(
+                          text: "账号退出",
+                          bgColor: Colors.deepOrange,
+                          onPressed: _logout,
+                        ),
+                      ))
                 ],
               )),
           // Container(color: pageColor,padding: EdgeInsets.symmetric(vertical: 300),),
@@ -77,11 +87,22 @@ class _MyPageState extends State<MyPage> with RouteAware{
   }
 
   _goLogin() {
-    RouterHelper.pushLogin(context);
+    RouterHelper.pushLogin(context).then((result){
+      if (result) {
+        _loadUser();
+      }
+    });
   }
 
   _goSetting() {
     RouterHelper.push(context, Routes.settings);
+  }
+
+  _logout() {
+    SpUtil.remove(USER_INFO);
+    setState(() {
+      user = null;
+    });
   }
 
   Widget _buildNavigationBar() {
@@ -105,14 +126,12 @@ class _MyPageState extends State<MyPage> with RouteAware{
 
 
   Widget _buildHeader() {
-    double width = Screen.width;
-    double height = 250;
     return Container(
-      width: width,
-      height: height,
+      width: Screen.width,
+      height: 300,
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [Color(0xFF119793), Color(0xFF9ad6d4), Color(0xFFc2fd87)],
+              colors: [Color(0xFF57ff56), Color(0xFF00FF93), Color(0xFF9aeed4)],
               begin: FractionalOffset(-1, -1),
               end: FractionalOffset(1, 1))
       ),
@@ -125,30 +144,31 @@ class _MyPageState extends State<MyPage> with RouteAware{
       print('_buildHeaderStack:' + user.username);
       return Column(
           children: [
-            SizedBox(height: Screen.topSafeHeight + 35),
+            SizedBox(height: Screen.topSafeHeight + 45),
             ClipOval(
-              child: CachedNetworkImage(imageUrl: user.avatarUrl),
-              //头像半径
-              //头像图片 -> NetworkImage网络图片，AssetImage项目资源包图片, FileImage本地存储图片
-//              backgroundImage: Image(CachedNetworkImage(imageUrl: user.avatarUrl)),
+              child: CachedNetworkImage(
+                  width: 120,
+                  height: 120,
+                  imageUrl: user.avatarUrl),
             ),
             Gaps.vGap15,
             Text(user.username,
                 style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white)
             ),
-            SizedBox(height: 25)
+            SizedBox(height: 35)
           ]);
     }
     else {
       return Container(
         alignment: Alignment.center,
-        padding: EdgeInsets.fromLTRB(30, Screen.topSafeHeight + 45, 30, 45),
+        padding: EdgeInsets.fromLTRB(30, Screen.topSafeHeight + 75, 30, 65),
         child: Column(
           children: <Widget>[
             RoundButton(
               width: 200,
               style: TextStyle(color: Colors.black),
               text: "账号登录",
+              bgColor: Colors.white,
               onPressed: _goLogin,
             ),
             Divider(height: 30,),
@@ -158,7 +178,7 @@ class _MyPageState extends State<MyPage> with RouteAware{
                 FloatingActionButton(
                   heroTag: "weixin",
                   onPressed: () {},
-                  child: new Icon(XDIcons.weixin),
+                  child: new Icon(XDIcons.weixin, color: Colors.green,),
                   elevation: 1,
                   highlightElevation: 2.0,
                   backgroundColor: Colors.white,        // 红色
@@ -176,7 +196,7 @@ class _MyPageState extends State<MyPage> with RouteAware{
                 FloatingActionButton(
                   heroTag: "weibo",
                   onPressed: () {},
-                  child: Icon(XDIcons.weibo),
+                  child: Icon(XDIcons.weibo,color: Colors.red,),
                   elevation: 1,
                   highlightElevation: 2.0,
                   backgroundColor: Colors.white,        // 红色

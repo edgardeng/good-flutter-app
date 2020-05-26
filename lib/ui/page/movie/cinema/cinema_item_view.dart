@@ -15,7 +15,6 @@ class CinemaItemView extends StatelessWidget {
 //        RouterHelper.push(context, path);
       },
       child: Container(
-          color: Colors.white,
           padding: EdgeInsets.all(10),
           child: Column(
             children: <Widget>[

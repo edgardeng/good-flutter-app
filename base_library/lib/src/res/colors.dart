@@ -41,11 +41,11 @@ class Colours {
   static const Color golden = Color(0xff8B7961);
   static const Color black = Color(0xff000000);
 
-  static const  Color primary = Color(0xFF57bd56);
-  static const  Color accent = Color(0xFF570056);
+  static const  Color primary = Color(0xFF57ee56);
+  static const  Color accent = Color(0xFF22eea0);
 
-  static const  Color dark_primary = Color(0xFFff9900);
-  static const  Color dark_accent = Color(0xFF57ff56);
+  static const  Color dark_primary = Color(0xFF57FF56);
+  static const  Color dark_accent = Color(0xFF22FFa0);
 
   static const Color app_bg = Color(0xfff0f0f0);
   static const Color dark_app_bg = Color(0xFF303030);

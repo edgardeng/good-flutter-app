@@ -12,7 +12,6 @@ class HomeSectionView extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      color: Colors.white,
       padding: EdgeInsets.fromLTRB(15, 15, 15, 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

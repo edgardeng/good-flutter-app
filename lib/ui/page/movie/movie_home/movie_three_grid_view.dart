@@ -32,7 +32,6 @@ class MovieThreeGridView extends StatelessWidget {
     }
 
     return Container(
-      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -42,8 +41,7 @@ class MovieThreeGridView extends StatelessWidget {
             child: Wrap(spacing: 15, runSpacing: 20, children: children,),
           ),
           Container(
-            height: 10,
-            color: Color(0xFFF5F5F5),
+            height: 10
           )
         ],
       ),
