@@ -42,8 +42,8 @@ class _AppState extends State<GoodFlutterApp> {
               themeMode: provider.getThemeMode(),
           //    home: home ?? SplashPage(),
               onGenerateRoute: RouterHelper.router.generator,
-              localizationsDelegates: const [ ],
-              supportedLocales: const [ Locale('zh', 'CN'), Locale('en', 'US')],
+//              localizationsDelegates: const [ ],
+//              supportedLocales: const [ Locale('zh', 'CN'), Locale('en', 'US')],
               builder: (context, child) {
               /// 保证文字大小不受手机系统设置影响 https://www.kikt.top/posts/flutter/layout/dynamic-text/
                 return MediaQuery(
