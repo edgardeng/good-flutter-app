@@ -13,6 +13,17 @@ class ApiClient {
   static const String webUrl = 'https://movie.douban.com/';
   var dio = ApiClient.createDio();
 
+  /// 登录
+  Future<User> login(String username, String password) async {
+    if (username != 'test' || password != '123456') {
+      return null;
+    }
+    var value = "{\"id\":\"1\",\"token\":\"abc123456\",\"username\": \"test\",\"avatar\": \"https://edgardeng.github.io/assets/image/favicon.jpg\"}";
+    User user = User.fromJson(json.decode(value));
+    return user;
+  }
+
+
   // 获取首页热门新闻文章
 //  Future<List<MovieNews>> getNewsList() async{
 //

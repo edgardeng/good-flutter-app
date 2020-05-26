@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/ui/widget/index.dart';
 
 class MovieDetailComment extends StatelessWidget {
@@ -14,7 +13,7 @@ class MovieDetailComment extends StatelessWidget {
   Widget build(BuildContext context) {
 
     List<Widget> children = [];
-    Widget noComment = Text('暂无短评', style: TextStyle(color: AppColor.white, fontSize: 14),);
+    Widget noComment = Text('暂无短评', style: TextStyle(color: Colors.white, fontSize: 14),);
 
     for (var i = 0; i < comments.length; i++) {
       children.add(CommentItemView(comments[i]));
@@ -34,7 +33,7 @@ class MovieDetailComment extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text('短评', style: TextStyle(fontSize: 16, color: AppColor.white, fontWeight: FontWeight.bold),),
+          Text('短评', style: TextStyle(fontSize: 16, color: Colors.white, fontWeight: FontWeight.bold),),
           SizedBox(height: 30.0,),
           Column(
             children: children,
@@ -57,7 +56,7 @@ class CommentItemView extends StatelessWidget {
     
     return Container(
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: AppColor.grey, width: 0.5))
+        border: Border(bottom: BorderSide(color: Colors.grey, width: 0.5))
       ),
       margin: EdgeInsets.only(bottom: 15),
       child: Column(
@@ -75,13 +74,13 @@ class CommentItemView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  Text(comment.author.name, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: AppColor.white),),
+                  Text(comment.author.name, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),),
                   SizedBox(height: 3,),
                   Row(
                     children: <Widget>[
                       new StaticRatingBar(size: 12.0,rate: comment.rating.value),
                       SizedBox(width: 10,),
-                      Text(comment.time.split(' ')[0], style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppColor.lightGrey),),
+                      Text(comment.time.split(' ')[0], style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey),),
                     ],
                   ),
                 ],
@@ -89,14 +88,14 @@ class CommentItemView extends StatelessWidget {
             ],
           ),
           SizedBox(height: 15,),
-          Text(comment.content, style: TextStyle(fontSize: 14, color: AppColor.white),),
+          Text(comment.content, style: TextStyle(fontSize: 14, color: Colors.white),),
           SizedBox(height: 15,),
           Row(
 
             children: <Widget>[
-              Icon(Icons.thumb_up, color: AppColor.lightGrey,size: 12,),
+              Icon(Icons.thumb_up, color: Colors.grey,size: 12,),
               SizedBox(width: 5,),
-              Text(number2Unit(comment.usefulCount), style: TextStyle(fontSize: 12, color: AppColor.lightGrey),),
+              Text(number2Unit(comment.usefulCount), style: TextStyle(fontSize: 12, color: Colors.grey),),
             ],
           ),
           SizedBox(height: 15,),

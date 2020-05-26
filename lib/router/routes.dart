@@ -13,6 +13,9 @@ class Routes {
   static String settings = "/settings";
 //  static String splash = "/splash";
   static String movieList = "/movie";
+  static String settings_theme = "/settings/theme";
+
+
   static void configureRoutes(Router router) {
     router.notFoundHandler = Handler(
         handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -23,6 +26,7 @@ class Routes {
     router.define(web, handler: webHandler);
     router.define(home, handler: rootHandler);
     router.define(settings, handler: settingsHandler);
+    router.define(settings_theme, handler: settingsThemeHandler);
     router.define(login, handler: loginHandler);
     router.define(video, handler: vieoHandler);
     router.define(movieList, handler: movieListHandler);

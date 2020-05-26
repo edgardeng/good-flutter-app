@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/common/constant.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/ui/widget/movie_classify_tag_item.dart';
-
-//import 'package:movie_recommend/public.dart';
-//import 'movie_classify_tag_item.dart';
 
 
 class MovieClassifySectionView extends StatelessWidget {
@@ -34,7 +30,7 @@ class MovieClassifySectionView extends StatelessWidget {
     var children = classifyList.map((tag) => MovieClassifyTagItem(tag: tag,)).toList();
 
     return Container(
-      color: AppColor.white,
+      color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

@@ -1,9 +1,6 @@
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:good_flutter_app/res/colors.dart';
-
-//import 'package:movie_recommend/public.dart';
 
 class MovieClassifyTagItem extends StatefulWidget {
   final String tag;
@@ -64,7 +61,7 @@ class _MovieClassifyTagItemState extends State<MovieClassifyTagItem> {
               width: width,
               height: height,
               child: Center(
-                child: Text(this.widget.tag, style: TextStyle(fontSize: 14, color: AppColor.white),),
+                child: Text(this.widget.tag, style: TextStyle(fontSize: 14, color: Colors.white),),
               )
             ),
           ],

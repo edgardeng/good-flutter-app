@@ -1,7 +1,6 @@
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/router/index.dart';
 import 'package:good_flutter_app/ui/widget/index.dart';
 
@@ -36,7 +35,7 @@ class MovieComingView extends StatelessWidget {
             SizedBox(height: 3,),
             Text(
               '${movie.collectCount}人想看',
-              style: TextStyle(fontSize: 10, color: AppColor.grey),
+              style: TextStyle(fontSize: 10, color: Colors.grey),
             ),
             SizedBox(height: 3,),
             Container(

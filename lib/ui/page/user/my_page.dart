@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/services.dart';
+import 'package:good_flutter_app/common/constant.dart';
 import 'package:good_flutter_app/model/index.dart';
+import 'package:good_flutter_app/res/icons.dart';
 import 'dart:ui' as ui;
-
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/router/index.dart';
 
 class MyPage extends StatefulWidget {
@@ -19,6 +18,13 @@ class _MyPageState extends State<MyPage> with RouteAware{
   int navAlpha = 0;
 
   @override
+  void initState() {
+    super.initState();
+    print('MyPage initState');
+    _loadUser();
+  }
+
+  @override
   void deactivate() {
     print('MyPage deactivate');
     super.deactivate();
@@ -27,20 +33,6 @@ class _MyPageState extends State<MyPage> with RouteAware{
   @override
   Widget build(BuildContext context) {
     print('MyPage build');
-//    Screen.updateStatusBarStyle(SystemUiOverlayStyle.light);
-//    return Scaffold(
-//      body: Container(
-//          color: AppColor.white,
-//          height: Screen.height,
-//          width: Screen.width,
-//          child: ListView(
-//            padding: EdgeInsets.only(top: 0),
-//            children: <Widget>[
-//              _buildHeader(),
-//              _buildItem('images/icon_github.png', '项目地址', _goGithub),
-//            ],
-//          )),
-//    );
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -52,7 +44,29 @@ class _MyPageState extends State<MyPage> with RouteAware{
                 children: <Widget>[
                   _buildHeader(),
                   Divider(height: 20, color: Colors.transparent,),
-                  _buildItem('images/icon_github.png', '项目地址', _goGithub),
+                  ClickItem(
+                    icon: Icon(XDIcons.github),
+                    title: 'Github',
+                    onTap: () => RouterHelper.pushWeb(context, 'good-flutter-app', 'https://github.com/edgardeng/good-flutter-app')
+                  ),
+                  Gaps.vGap5,
+                  ClickItem(icon: Icon(XDIcons.sofa), title: '看电影', onTap: (){} ),
+                  Gaps.vGap5,
+                  ClickItem(
+                    icon: Icon(Icons.edit),
+                      title: '我的发布',
+                      onTap: (){}
+                  ),
+                  ClickItem(
+                      icon: Icon(Icons.event_note, color:Colors.cyan),
+                      title: '我的日记',
+                      onTap: (){}
+                  ),
+                  ClickItem(
+                      icon: Icon(Icons.favorite_border, color:Colors.deepOrange),
+                      title: '我的关注',
+                      onTap: (){}
+                  ),
                 ],
               )),
           // Container(color: pageColor,padding: EdgeInsets.symmetric(vertical: 300),),
@@ -65,50 +79,10 @@ class _MyPageState extends State<MyPage> with RouteAware{
   _goLogin() {
     RouterHelper.pushLogin(context);
   }
-  _goGithub() {
-    RouterHelper.pushWeb(context, 'good-flutter-app', 'https://github.com/edgardeng/good-flutter-app');
-  }
+
   _goSetting() {
-    RouterHelper.push(context, '/settings');
+    RouterHelper.push(context, Routes.settings);
   }
-
-  Widget _buildItem(String icon, String text, onTap) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: Screen.width,
-        padding: EdgeInsets.symmetric(vertical: 15),
-        decoration: BoxDecoration(
-          color: AppColor.white,
-            border: Border(
-                bottom: BorderSide(color: AppColor.lightGrey, width: 0.5))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Image.asset(
-                  icon,
-                  fit: BoxFit.cover,
-                  height: 30,
-                  width: 30,
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                Text(
-                  text,
-                  style: TextStyle(fontSize: 16),
-                )
-              ],
-            ),
-            Icon(Icons.keyboard_arrow_right)
-          ],
-        ),
-      ),
-    );
-  }
-
 
   Widget _buildNavigationBar() {
     return Positioned(
@@ -121,8 +95,8 @@ class _MyPageState extends State<MyPage> with RouteAware{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                GestureDetector(onTap: _goSetting, child: Icon(Icons.settings, color: AppColor.white,)),
-                GestureDetector(child: Icon(Icons.message, color: AppColor.white,))
+                GestureDetector(onTap: _goSetting, child: Icon(Icons.settings, color: Colors.white,)),
+                GestureDetector(child: Icon(Icons.message, color: Colors.white,))
               ],
             )
         )
@@ -148,47 +122,21 @@ class _MyPageState extends State<MyPage> with RouteAware{
 
   Widget _buildHeaderStack() {
     if (user != null) {
-      print('_buildHeaderStack:' + user.nickname);
-      double height = 200;
+      print('_buildHeaderStack:' + user.username);
       return Column(
           children: [
-            Image(
-              image: CachedNetworkImageProvider(user.avatarUrl),
-              fit: BoxFit.cover,
-              width: 200,
-              height: 200,
+            SizedBox(height: Screen.topSafeHeight + 35),
+            ClipOval(
+              child: CachedNetworkImage(imageUrl: user.avatarUrl),
+              //头像半径
+              //头像图片 -> NetworkImage网络图片，AssetImage项目资源包图片, FileImage本地存储图片
+//              backgroundImage: Image(CachedNetworkImage(imageUrl: user.avatarUrl)),
             ),
-            Opacity(
-              opacity: 0.7,
-              child: Container(
-                  color: Colors.black, width: Screen.width, height: height),
+            Gaps.vGap15,
+            Text(user.username,
+                style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.white)
             ),
-            BackdropFilter(
-              filter: ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-              child: Container(
-                  width: Screen.width,
-                  height: height,
-                  color: Colors.transparent,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundImage: CachedNetworkImageProvider(user.avatarUrl),
-                        radius: 50.0,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text('MayanDev',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: AppColor.white,
-                          ))
-                    ],
-                  )),
-            ),
+            SizedBox(height: 25)
           ]);
     }
     else {
@@ -199,7 +147,7 @@ class _MyPageState extends State<MyPage> with RouteAware{
           children: <Widget>[
             RoundButton(
               width: 200,
-              style: TextStyle(color: AppColor.black),
+              style: TextStyle(color: Colors.black),
               text: "账号登录",
               onPressed: _goLogin,
             ),
@@ -208,18 +156,18 @@ class _MyPageState extends State<MyPage> with RouteAware{
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 FloatingActionButton(
-                  heroTag: "qq",
+                  heroTag: "weixin",
                   onPressed: () {},
-                  child: new Icon(Icons.add_a_photo, color: AppColor.red,),
+                  child: new Icon(XDIcons.weixin),
                   elevation: 1,
                   highlightElevation: 2.0,
                   backgroundColor: Colors.white,        // 红色
                 ),
                 SizedBox(width: 50),
                 FloatingActionButton(
-                  heroTag: "weixin",
+                  heroTag: "phone",
                   onPressed: () {},
-                  child: new Icon(Icons.add_a_photo),
+                  child: new Icon(Icons.phone_android, color: Colors.blue,),
                   elevation: 1,
                   highlightElevation: 2.0,
                   backgroundColor: Colors.white,        // 红色
@@ -228,7 +176,7 @@ class _MyPageState extends State<MyPage> with RouteAware{
                 FloatingActionButton(
                   heroTag: "weibo",
                   onPressed: () {},
-                  child: new Icon(Icons.add_a_photo),
+                  child: Icon(XDIcons.weibo),
                   elevation: 1,
                   highlightElevation: 2.0,
                   backgroundColor: Colors.white,        // 红色
@@ -244,7 +192,8 @@ class _MyPageState extends State<MyPage> with RouteAware{
   }
 
   Future _loadUser() async {
-    String jsonInfo = SpUtil.getString("user.info");
+    print('is _loadUser');
+    String jsonInfo = SpUtil.getString(USER_INFO);
     if (jsonInfo != null) {
       User u = User.fromJson(json.decode(jsonInfo));
       setState(() {
@@ -254,54 +203,4 @@ class _MyPageState extends State<MyPage> with RouteAware{
     //  获取本地存储的版本 和 当前版本 比较
   }
 
-
-//  Widget _buildHeader() {
-//    double width = Screen.width;
-//    double height = 250;
-//    return Container(
-//      width: width,
-//      height: height,
-//      child: Stack(
-//        children: <Widget>[
-//          Image(
-//            image: CachedNetworkImageProvider(avatarUrl),
-//            fit: BoxFit.cover,
-//            width: Screen.width,
-//            height: height,
-//          ),
-//          Opacity(
-//            opacity: 0.7,
-//            child: Container(
-//                color: Colors.black, width: Screen.width, height: height),
-//          ),
-//          BackdropFilter(
-//            filter: ui.ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-//            child: Container(
-//                width: Screen.width,
-//                height: height,
-//                color: Colors.transparent,
-//                child: Column(
-//                  mainAxisAlignment: MainAxisAlignment.center,
-//                  crossAxisAlignment: CrossAxisAlignment.center,
-//                  children: <Widget>[
-//                    CircleAvatar(
-//                      backgroundImage: CachedNetworkImageProvider(avatarUrl),
-//                      radius: 50.0,
-//                    ),
-//                    SizedBox(
-//                      height: 10,
-//                    ),
-//                    Text('MayanDev',
-//                        style: TextStyle(
-//                          fontSize: 18,
-//                          fontWeight: FontWeight.bold,
-//                          color: AppColor.white,
-//                        ))
-//                  ],
-//                )),
-//          ),
-//        ],
-//      ),
-//    );
-//  }
 }

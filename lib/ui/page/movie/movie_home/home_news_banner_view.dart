@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
+
 
 class NewsBannerView extends StatelessWidget {
   final List<NewsBanner> banners;
@@ -59,7 +59,7 @@ class NewsBannerView extends StatelessWidget {
                                 Text(
                                   banner.news.title,
                                   style: TextStyle(
-                                    color: AppColor.white,
+                                    color: Colors.white,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -68,7 +68,7 @@ class NewsBannerView extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                     style: TextStyle(
-                                      color: AppColor.white,
+                                      color: Colors.white,
                                     )),
                               ],
                             ),

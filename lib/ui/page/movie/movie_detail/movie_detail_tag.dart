@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/util/utility.dart';
-
-//import 'package:movie_recommend/public.dart';
-
 
 class MovieDetailTag extends StatelessWidget {
   final List tags;
@@ -25,7 +21,7 @@ class MovieDetailTag extends StatelessWidget {
               style: TextStyle(
                 fontSize: fixedFontSize(16),
                 fontWeight: FontWeight.bold,
-                color: AppColor.white
+                color: Colors.white
               )),
           ),
           SizedBox(height: 10,),
@@ -66,8 +62,8 @@ class MovieDetailTag extends StatelessWidget {
           children: <Widget>[
             Text(tag,
                 style: TextStyle(
-                    fontSize: fixedFontSize(12), color: AppColor.white)),
-            Icon(Icons.keyboard_arrow_right, color: AppColor.white,),
+                    fontSize: fixedFontSize(12), color: Colors.white)),
+            Icon(Icons.keyboard_arrow_right, color: Colors.white,),
           ],
         ))
     );

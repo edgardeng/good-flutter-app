@@ -1,67 +1,82 @@
+import 'package:base_library/base_library.dart';
+import 'package:flustars/flustars.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:good_flutter_app/common/constant.dart';
+import 'package:good_flutter_app/router/index.dart';
+import 'package:good_flutter_app/router/routes.dart';
 
+
+/// 设置页面
+///
 class SettingsPage extends StatefulWidget {
-  _SettingsPageState createState() => _SettingsPageState();
+  @override
+  _SettingPageState createState() => _SettingPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
-
-  bool isDarkMode = false;
-
-  @override
-  void deactivate() {
-    print('Settings deactivate');
-    super.deactivate();
-  }
-
-  @override
-  void dispose() {
-    print('Settings dispose');
-    super.dispose();
-  }
-
+class _SettingPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
+    String theme = SpUtil.getString(APP_THEME);
+    String themeMode;
+    switch(theme) {
+      case 'Dark':
+        themeMode = '开启';
+        break;
+      case 'Light':
+        themeMode = '关闭';
+        break;
+      default:
+        themeMode = '跟随系统';
+        break;
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("设置"),
-        leading: GestureDetector(
-          onTap: back,
-          child: Icon(Icons.arrow_back),
-        ),
+        title: Text('设置'),
       ),
-      // We're using a Builder here so we have a context that is below the Scaffold
-      // to allow calling Scaffold.of(context) so we can show a snackbar.
-      body: Builder(builder: (BuildContext context) {
-        return Column (
-          children: <Widget>[
-            ListTile(
-//              leading: new Icon(Icons.cake),
-              title: new Text('深色模式'),
-//              subtitle: new Row(
-//                children: <Widget>[
-//                  new Text('副标题'),
-//                  new Icon(Icons.person)
-//                ],
-//              ),
-              trailing: Switch(
-                value: isDarkMode,
-                activeColor: Colors.blue,     // 激活时原点颜色
-                onChanged: (bool val) {
-                  this.setState(() {
-                    this.isDarkMode = !this.isDarkMode;
-                  });
-                },
-              )
-            )
-          ],
-        );
-      }),
+      body: Column(
+        children: <Widget>[
+          Gaps.vGap5,
+          ClickItem(
+              title: '夜间模式',
+              content: themeMode,
+              onTap: () => RouterHelper.push(context, Routes.settings_theme)
+          ),
+          ClickItem(
+              title: '账号管理',
+//              onTap: () => NavigatorUtils.push(context, SettingRouter.accountManagerPage)
+          ),
+          ClickItem(
+              title: '清除缓存',
+              content: '23.5MB',
+              onTap: () {}
+          ),
+
+          ClickItem(
+              title: '检查更新',
+//              onTap: () => _showUpdateDialog()
+          ),
+          ClickItem(
+              title: '关于我们',
+//              onTap: () => NavigatorUtils.push(context, SettingRouter.aboutPage)
+          )
+        ],
+      ),
     );
   }
-  // 返回上个页面
-  back() {
-    Navigator.pop(context);
-  }
+
+//  void _showExitDialog() {
+//    showDialog(
+//        context: context,
+//        builder: (_) => ExitDialog()
+//    );
+//  }
+//
+//  void _showUpdateDialog() {
+//    showDialog(
+//        context: context,
+//        barrierDismissible: false,
+//        builder: (_) => UpdateDialog()
+//    );
+//  }
 }

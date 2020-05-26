@@ -1,8 +1,6 @@
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/data/api/api_client.dart';
-import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/ui/page/movie/movie_rank/movie_banner_item_view.dart';
 
 class MovieRankListView extends StatefulWidget {

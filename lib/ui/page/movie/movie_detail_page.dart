@@ -6,7 +6,6 @@ import 'package:good_flutter_app/data/api/api_client.dart';
 import 'package:good_flutter_app/model/index.dart';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'movie_detail/movie_detail_header.dart';
 import 'movie_detail/movie_detail_tag.dart';
 import 'movie_detail/movie_summary_view.dart';
@@ -28,7 +27,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
   MovieDetail movieDetail;
   double navAlpha = 0;
   ScrollController scrollController = ScrollController();
-  Color pageColor = AppColor.white;
+  Color pageColor = Colors.white;
   bool isSummaryUnfold = false;
 
   @override
@@ -122,7 +121,7 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
                 Expanded(
                   child: Text(
                     movieDetail.title,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.white),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),

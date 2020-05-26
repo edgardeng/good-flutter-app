@@ -1,10 +1,7 @@
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/router/index.dart';
-import 'package:good_flutter_app/ui/widget/index.dart';
+
 
 /// 排行榜 banner
 ///
@@ -69,11 +66,11 @@ class RankBannerItemView extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           subTitle,
-                          style: TextStyle(color: AppColor.white),
+                          style: TextStyle(color: Colors.white),
                         ),
                         Text(title,
                             style: TextStyle(
-                                color: AppColor.white,
+                                color: Colors.white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.bold)),
                       ],

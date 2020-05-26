@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:good_flutter_app/data/api/api_client.dart';
 import 'package:good_flutter_app/model/index.dart';
 import 'package:base_library/base_library.dart';
-import 'package:good_flutter_app/res/colors.dart';
 
 
 // 查看更多相册列表
@@ -48,7 +47,7 @@ class _MoviePhotoListState extends State<MoviePhotoList> {
         appBar: AppBar(
           brightness: Brightness.light,
           title: Text(this.widget.title),
-          backgroundColor: AppColor.white,
+          backgroundColor: Colors.white,
           leading: GestureDetector(
             onTap: back,
             child: Image.asset('images/icon_arrow_back_black.png'),

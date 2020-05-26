@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/res/icons.dart';
 
 import 'movie/cinema_page.dart';
@@ -28,7 +27,7 @@ final List<BottomBarItem> _bottomBarItems = <BottomBarItem>[
   BottomBarItem(
       title: '榜单',
       name: 'rank',
-      icon: Icon(XDIcons.super_star),
+      icon: Icon(XDIcons.rank),
       widget: MovieRankPage()),
   BottomBarItem(
       title: '影院',
@@ -95,7 +94,7 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
 //        selectedIconTheme: IconThemeData(color: AppColor.primary),
 //        selectedLabelStyle: TextStyle(color: AppColor.primary),
-        selectedItemColor: AppColor.primary,
+//        selectedItemColor: AppColor.primary,
         items: _bottomBarItems.map((BottomBarItem bottomBarItem) {
           return BottomNavigationBarItem(
               icon: bottomBarItem.icon, title: Text(bottomBarItem.title));

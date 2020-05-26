@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/ui/widget/movie_classify_section_view.dart';
-
-
-//import 'package:movie_recommend/public.dart';
-//
-//import 'package:movie_recommend/movie/movie_classify_section_view.dart';
 
 class MovieClassifyListView extends StatefulWidget {
 
@@ -30,7 +24,7 @@ class _MovieClassifyListViewState extends State<MovieClassifyListView> {
         appBar: AppBar(
           brightness: Brightness.light,
           title: Text('分类找电影'),
-          backgroundColor: AppColor.white,
+          backgroundColor: Colors.white,
           elevation: 0,
           leading: GestureDetector(
             onTap: back,

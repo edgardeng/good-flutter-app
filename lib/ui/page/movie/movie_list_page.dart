@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:good_flutter_app/data/api/api_client.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/ui/widget/index.dart';
 
 /// 电影列表页面 （豆瓣热门，正在热映，即将上映）
@@ -53,11 +52,11 @@ class _MovieListPageState extends State<MovieListPage> {
     return Scaffold(
         appBar: AppBar(
 //          brightness: Brightness.light,
-          title: Text(title, style: TextStyle(color: AppColor.black)),
-          backgroundColor: AppColor.white,
+          title: Text(title, style: TextStyle(color: Colors.black)),
+          backgroundColor: Colors.white,
           leading: GestureDetector(
             onTap: (){ Navigator.pop(context); },
-            child: Icon(Icons.arrow_back, color: AppColor.black),
+            child: Icon(Icons.arrow_back, color: Colors.black),
           ),
           elevation: 0,
         ),

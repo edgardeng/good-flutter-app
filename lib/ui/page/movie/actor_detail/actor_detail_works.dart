@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:base_library/base_library.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/ui/widget/index.dart';
 import 'package:good_flutter_app/util/utility.dart';
 
@@ -27,7 +25,7 @@ class ActorDetailWorks extends StatelessWidget {
               style: TextStyle(
                 fontSize: fixedFontSize(16),
                 fontWeight: FontWeight.bold,
-                color: AppColor.white
+                color: Colors.white
               )),
           ),
           SizedBox(height: 20,),
@@ -68,7 +66,7 @@ class ActorDetailWorks extends StatelessWidget {
             Text(
               work.movie.title,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(fontSize: 14, color: AppColor.white),
+              style: TextStyle(fontSize: 14, color: Colors.white),
               maxLines: 1,
             ),
             SizedBox(height: 3,),
@@ -78,7 +76,7 @@ class ActorDetailWorks extends StatelessWidget {
               children: <Widget>[
                 new StaticRatingBar(size: 12.0,rate: work.movie.rating.average/2,),
                 SizedBox(width: 5,),  
-                Text(work.movie.rating.average.toString(),style: TextStyle(color: AppColor.white, fontSize: 12.0),)
+                Text(work.movie.rating.average.toString(),style: TextStyle(color: Colors.white, fontSize: 12.0),)
               ],
             ),
           ],

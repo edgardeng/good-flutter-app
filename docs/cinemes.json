@@ -1,9 +1,9 @@
 [
   {
     "id": "001",
-    "name": "万达影城（五角场万达广场店",
-    "address": "杨浦区淞沪路77号万达广场3层",
-    "distance": "500m",
+    "token": "万达影城（五角场万达广场店",
+    "username": "杨浦区淞沪路77号万达广场3层",
+    "avatar": "500m",
     "refund": true,
     "endorse": true,
     "vip": true,

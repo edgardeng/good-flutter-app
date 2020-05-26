@@ -43,6 +43,8 @@ dependencies:
   webview_flutter: ^0.3.22
   # location
   location: ^3.0.0
+  # provider
+  provider: ^4.1.2
 
   base_library:
       path: ./base_library/

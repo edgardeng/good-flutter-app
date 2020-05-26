@@ -2,14 +2,10 @@ import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/router/index.dart';
 
 import 'movie_cover_image.dart';
 import 'widget_rating_bar.dart';
-
-
-//import 'package:movie_recommend/public.dart';
 
 class MovieListItem extends StatelessWidget {
   final MovieItem movie;
@@ -76,8 +72,8 @@ class MovieListItem extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(spaceWidth, spaceWidth, 0, spaceWidth),
         decoration: BoxDecoration(
             border: Border(
-                bottom: BorderSide(color: AppColor.lightGrey, width: 0.5)),
-            color: AppColor.white),
+                bottom: BorderSide(color: Colors.grey, width: 0.5)),
+            color: Colors.white),
         child: Row(
           children: <Widget>[
             MovieCoverImage(
@@ -117,7 +113,7 @@ class MovieListItem extends StatelessWidget {
                       ),
                       Text(
                         movie.rating.average.toString(),
-                        style: TextStyle(color: AppColor.grey, fontSize: 12.0),
+                        style: TextStyle(color: Colors.grey, fontSize: 12.0),
                       )
                     ],
                   ),
@@ -126,7 +122,7 @@ class MovieListItem extends StatelessWidget {
                   ),
                   Text(
                     '${movie.year} /${genres2String(movie.genres)}/${actor2String(movie.directors)}/${actor2String(movie.casts)}',
-                    style: TextStyle(color: AppColor.grey, fontSize: 14),
+                    style: TextStyle(color: Colors.grey, fontSize: 14),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   )

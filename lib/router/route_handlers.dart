@@ -40,6 +40,7 @@ var vieoHandler = Handler(handlerFunc: (BuildContext context, Map<String, List<S
 
 var citySelectHandler = Handler(handlerFunc: (_, params) => CitySelectPage());
 var settingsHandler = Handler(handlerFunc: (_, params) => SettingsPage());
+var settingsThemeHandler = Handler(handlerFunc: (_, params) => ThemePage());
 
 
 //var demoRouteHandler = Handler(

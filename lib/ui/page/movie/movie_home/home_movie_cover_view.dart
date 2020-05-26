@@ -1,7 +1,6 @@
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/router/index.dart';
 import 'package:good_flutter_app/ui/widget/index.dart';
 
@@ -42,7 +41,7 @@ class HomeMovieCoverView extends StatelessWidget {
               children: <Widget>[
                 new StaticRatingBar(size: 13.0,rate: movie.rating.average/2,),
                 SizedBox(width: 5,),  
-                Text(movie.rating.average.toString(),style: TextStyle(color: AppColor.grey, fontSize: 12.0),)
+                Text(movie.rating.average.toString(),style: TextStyle(color: Colors.grey, fontSize: 12.0),)
               ],
             ),
           ],

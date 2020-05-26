@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/ui/widget/index.dart';
 
 
@@ -46,12 +45,12 @@ class MovieCell extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: 14,
-            color: AppColor.grey,
+            color: Colors.grey,
           ),
         ),
         SizedBox(height: 5,),
         Row(
-          children: buildTags(movie.genres, AppColor.grey)
+          children: buildTags(movie.genres, Colors.grey)
         )
       ],
     );

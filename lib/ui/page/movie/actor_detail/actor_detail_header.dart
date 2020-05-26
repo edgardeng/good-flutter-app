@@ -4,7 +4,7 @@ import 'dart:ui' as ui;
 
 import 'package:base_library/base_library.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
+
 class ActorDetailHeader extends StatelessWidget {
   final MovieActorDetail actorDetail;
   final Color coverColor;
@@ -48,7 +48,7 @@ class ActorDetailHeader extends StatelessWidget {
                       radius: 50.0,
                     ),
                     SizedBox(height: 10,),
-                    Text(actorDetail.name, style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.white, ))
+                    Text(actorDetail.name, style:TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colours.white, ))
                   ],
                 )),
           ),

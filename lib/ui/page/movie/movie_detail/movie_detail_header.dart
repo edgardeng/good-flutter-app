@@ -2,7 +2,6 @@ import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/ui/widget/index.dart';
 import 'package:good_flutter_app/util/utility.dart';
 
@@ -71,7 +70,7 @@ class MovieDetailHeader extends StatelessWidget {
                 Text(movieDetail.title, 
                   style: TextStyle(
                     fontSize: fixedFontSize(20), 
-                    color: AppColor.white, 
+                    color: Colors.white, 
                     fontWeight: FontWeight.bold),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,  
@@ -80,7 +79,7 @@ class MovieDetailHeader extends StatelessWidget {
                 Text(movieDetail.originalTitle+'（${movieDetail.year}）',
                       style: TextStyle(
                         fontSize: fixedFontSize(16),
-                        color: AppColor.white,
+                        color: Colors.white,
                         fontWeight: FontWeight.bold
 
                       ),
@@ -94,13 +93,13 @@ class MovieDetailHeader extends StatelessWidget {
                   children: <Widget>[
                     new StaticRatingBar(size: 13.0,rate: movieDetail.rating.average/2,),
                     SizedBox(width: 5,),  
-                    Text(movieDetail.rating.average.toString(),style: TextStyle(color: AppColor.white, fontSize: fixedFontSize(12)),)
+                    Text(movieDetail.rating.average.toString(),style: TextStyle(color: Colors.white, fontSize: fixedFontSize(12)),)
                   ],
                 ),
                 SizedBox(height: 10,),
                 Text('${countries2String(movieDetail.countries)}/${list2String(movieDetail.genres)}/ 上映时间：${list2String(movieDetail.pubdates)}/ 片长：${list2String(movieDetail.durations)}/${actor2String(movieDetail.directors)}/${actor2String(movieDetail.casts)}',
                   style: TextStyle(
-                    color: AppColor.white,
+                    color: Colors.white,
                     fontSize: fixedFontSize(12)
                   ),
                   maxLines: 3,

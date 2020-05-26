@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
-import 'package:good_flutter_app/res/colors.dart';
+import 'package:good_flutter_app/common/constant.dart';
+import 'package:good_flutter_app/data/api/api_client.dart';
+import 'package:good_flutter_app/model/index.dart';
+import 'package:good_flutter_app/router/index.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -16,7 +21,15 @@ class LoginPage extends StatelessWidget {
             height: double.infinity,
             fit: BoxFit.cover,
           ),
-          new LoginBody()
+          new LoginBody(),
+          Positioned(
+            top: 20,
+            left: 20,
+            child: IconButton(
+              icon: Icon(Icons.close, color: Colors.grey),
+              onPressed: () { RouterHelper.pop(context); },
+            ),
+          )
         ],
       ),
     );
@@ -29,14 +42,13 @@ class LoginBody extends StatelessWidget {
     TextEditingController _controllerName = new TextEditingController();
     TextEditingController _controllerPwd = new TextEditingController();
 
-    _controllerName.text =
-        SpUtil.getString(BaseConstant.keyUserName, defValue: 'test');
+    _controllerName.text = 'test'; // SpUtil.getString(BaseConstant.keyUserName, defValue: );
     _controllerPwd.text = '123456';
 
-    void _userLogin() {
+    void _userLogin() async {
       String username = _controllerName.text;
       String password = _controllerPwd.text;
-      if (username.isEmpty || username.length < 6) {
+      if (username.isEmpty || username.length < 4) {
         Util.showSnackBar(context, username.isEmpty ? "请输入用户名～" : "用户名至少6位～");
         return;
       }
@@ -44,16 +56,17 @@ class LoginBody extends StatelessWidget {
         Util.showSnackBar(context, username.isEmpty ? "请输入密码～" : "密码至少6位～");
         return;
       }
-
-      SpUtil.putString(BaseConstant.keyUserName, username);
-
-      SpUtil.putString(BaseConstant.keyAppToken, "test_token");
-
-      Util.showSnackBar(context, "登录成功～");
-
-      Future.delayed(new Duration(milliseconds: 500), () {
-        RouteUtil.goMain(context);
-      });
+      ApiClient apiClient = new ApiClient();
+      User user = await apiClient.login(username, password);
+      if (user != null) {
+        SpUtil.putString(USER_INFO, json.encode(user.toJson()));
+        Future.delayed(new Duration(milliseconds: 500), () {
+          RouterHelper.pop(context);
+        });
+      } else {
+        Util.showSnackBar(context, "用户名或密码错误");
+        return;
+      }
     }
 
     return new Column(
@@ -77,7 +90,7 @@ class LoginBody extends StatelessWidget {
                     hintText: "密码",
                   ),
                   new RoundButton(
-                    bgColor: AppColor.primary,
+//                    bgColor: Colors.primary,
                     text: "登录",
                     margin: EdgeInsets.only(top: 20),
                     onPressed: () {

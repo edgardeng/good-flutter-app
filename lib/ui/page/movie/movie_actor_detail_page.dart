@@ -2,14 +2,9 @@ import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-//import 'package:palette_generator/palette_generator.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:good_flutter_app/data/api/api_client.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
-
-//import 'package:movie_recommend/public.dart';
-
 import 'actor_detail/actor_detail_header.dart';
 import 'actor_detail/actor_detail_summary.dart';
 import 'actor_detail/actor_detail_works.dart';
@@ -31,7 +26,7 @@ class _ActorDetailPageState extends State<ActorDetailPage> {
   MovieActorDetail actorDetail;
   double navAlpha = 0;
   ScrollController scrollController = ScrollController();
-  Color pageColor = AppColor.white;
+  Color pageColor = Colors.white;
   bool isSummaryUnfold = false;
 
   @override
@@ -136,7 +131,7 @@ class _ActorDetailPageState extends State<ActorDetailPage> {
                 Expanded(
                   child: Text(
                     actorDetail.name,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppColor.white),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,
                   ),

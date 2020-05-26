@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/util/utility.dart';
 
 class ActorDetailSummary extends StatelessWidget {
@@ -20,13 +19,13 @@ class ActorDetailSummary extends StatelessWidget {
               style: TextStyle(
                   fontSize: fixedFontSize(16),
                   fontWeight: FontWeight.bold,
-                  color: AppColor.white)
+                  color: Colors.white)
           ),
           SizedBox(height: 15,),
           Text(
             summary,
             style:
-                TextStyle(fontSize: fixedFontSize(14), color: AppColor.white, ),
+                TextStyle(fontSize: fixedFontSize(14), color: Colors.white, ),
             maxLines: isUnfold ? null : 4,
             overflow: TextOverflow.clip,
             
@@ -37,8 +36,8 @@ class ActorDetailSummary extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(isUnfold ? '收起' : '显示全部', style:TextStyle(fontSize:fixedFontSize(14), color: AppColor.white),),
-                Icon(isUnfold ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, color: AppColor.white,)
+                Text(isUnfold ? '收起' : '显示全部', style:TextStyle(fontSize:fixedFontSize(14), color: Colors.white),),
+                Icon(isUnfold ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down, color: Colors.white,)
               ],
             ),
           ),

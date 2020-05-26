@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/router/index.dart';
 import 'package:good_flutter_app/util/utility.dart';
 class MovieDetailCastView extends StatelessWidget {
@@ -33,7 +32,7 @@ class MovieDetailCastView extends StatelessWidget {
               style: TextStyle(
                 fontSize: fixedFontSize(16),
                 fontWeight: FontWeight.bold,
-                color: AppColor.white
+                color: Colors.white
               )),
           ),
           SizedBox(height: 10,),
@@ -83,7 +82,7 @@ class MovieDetailCastView extends StatelessWidget {
           Container(
             width: 80,
             child: Center(
-              child: Text(cast.name, style: TextStyle(fontSize: fixedFontSize(14), color: AppColor.white),maxLines: 1, overflow: TextOverflow.ellipsis,),
+              child: Text(cast.name, style: TextStyle(fontSize: fixedFontSize(14), color: Colors.white),maxLines: 1, overflow: TextOverflow.ellipsis,),
             ),
             
           ),

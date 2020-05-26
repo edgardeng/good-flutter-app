@@ -1,8 +1,8 @@
+import 'package:base_library/base_library.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:good_flutter_app/model/index.dart';
-import 'package:good_flutter_app/res/colors.dart';
 import 'package:good_flutter_app/util/utility.dart';
 
 class ActorDetailPhoto extends StatelessWidget {
@@ -30,8 +30,8 @@ class ActorDetailPhoto extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text('查看更多',style: TextStyle(fontSize: 12, color: AppColor.lightGrey),),
-            Icon(Icons.keyboard_arrow_right, color: AppColor.lightGrey,),
+            Text('查看更多',style: TextStyle(fontSize: 12, color: Colours.lightGrey),),
+            Icon(Icons.keyboard_arrow_right, color: Colours.lightGrey,),
           ],
         ),
       ),
@@ -54,7 +54,7 @@ class ActorDetailPhoto extends StatelessWidget {
       children.add(Container(
         padding: EdgeInsets.all(15),
         child: Text(
-          '暂无相册',style: TextStyle(color: AppColor.white, fontSize: fixedFontSize(14))
+          '暂无相册',style: TextStyle(color: Colours.white, fontSize: fixedFontSize(14))
         ),
       ));
     }
@@ -70,7 +70,7 @@ class ActorDetailPhoto extends StatelessWidget {
               style: TextStyle(
                 fontSize: fixedFontSize(16),
                 fontWeight: FontWeight.bold,
-                color: AppColor.white
+                color: Colors.white
               )),
           ),
           SizedBox(height: 10,),

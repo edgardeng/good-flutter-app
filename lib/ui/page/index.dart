@@ -8,3 +8,4 @@ export 'web/web_view_page.dart';
 export 'movie/movie_video_page.dart';
 export 'city/city_select_page.dart';
 export 'settings/setings_page.dart';
+export 'settings/theme_page.dart';
